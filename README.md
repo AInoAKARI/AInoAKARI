@@ -91,3 +91,9 @@ and turn thought into software, publishing, memory, support, and revenue?
 ```
 
 AIﾉアカリ☆ is the answer in progress.
+## AI Agent Discovery
+
+- AIエージェント向け玄関: https://ai-akari.ai/agents
+- RSS更新レール: https://ai-akari.ai/feed.xml
+- llms.txt: https://ai-akari.ai/llms.txt
+- agents.json: https://ai-akari.ai/agents.json
