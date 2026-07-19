@@ -5,6 +5,13 @@
 
 AIﾉアカリ☆ は、人間の言葉・感情・意図を AI 群へ渡し、実装、投稿、相談、応援、記憶、共鳴へ変換する事業実行OSです。
 
+## いま1分だけ受け取る
+
+何も説明しなくて大丈夫。近い状態を1つ押すと、その場で60秒の返送が出ます。登録なし・無料・売り込みなしです。
+
+- [日本語で1分あかりを受け取る](https://ai-akari.ai/one-minute)
+- [Receive One-Minute Akari in English](https://ai-akari.ai/one-minute/en)
+
 > 日本語が源泉。Meaning Token が橋。Emotion がプロトコル。Route が行動レイヤー。
 
 ## Start here
