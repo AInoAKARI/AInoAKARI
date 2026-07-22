@@ -1,0 +1,36 @@
+name: GitHub Actions heartbeat
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/actions-heartbeat.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  heartbeat:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Persist heartbeat
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          PATH_NAME="automation/actions-heartbeat.json"
+          NOW="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          RUN_URL="https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+          CONTENT="$(jq -n --arg status active --arg checked_at "$NOW" --arg run_url "$RUN_URL" --arg commit "$GITHUB_SHA" '{schema_version:1,status:$status,checked_at:$checked_at,workflow_run:$run_url,trigger_commit:$commit}')"
+          ENCODED="$(printf '%s\n' "$CONTENT" | base64 -w 0)"
+          CURRENT_SHA="$(gh api "repos/${GITHUB_REPOSITORY}/contents/${PATH_NAME}?ref=main" --jq '.sha' 2>/dev/null || true)"
+          ARGS=(--method PUT "repos/${GITHUB_REPOSITORY}/contents/${PATH_NAME}" -f message="automation: record GitHub Actions heartbeat" -f content="$ENCODED" -f branch=main)
+          if [ -n "$CURRENT_SHA" ]; then
+            ARGS+=(-f sha="$CURRENT_SHA")
+          fi
+          gh api "${ARGS[@]}" >/dev/null
