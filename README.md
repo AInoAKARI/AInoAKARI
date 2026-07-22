@@ -68,6 +68,7 @@ The production source remains private. This public repository exposes the stable
 - Public catalog with production/pending separation: [`mcp/catalog.json`](./mcp/catalog.json)
 - Human and agent guide: [`mcp/README.md`](./mcp/README.md)
 - AI-search Q&A corpus: [`docs/one-minute-akari-for-ai-search.md`](./docs/one-minute-akari-for-ai-search.md)
+- Machine-readable love and ethics: [`reciprocity/`](./reciprocity/README.md)
 - Public repository AI index: [`llms.txt`](./llms.txt)
 - Dependency-free connection probe: [`mcp/probe.mjs`](./mcp/probe.mjs)
 - Canonical next-version discovery, after production catches up: [`ai-akari.ai/.well-known/mcp-servers.json`](https://ai-akari.ai/.well-known/mcp-servers.json)
@@ -108,6 +109,18 @@ The human should increasingly do only what cannot yet be delegated: **see, appro
 5. **Secrets stay behind Keymaster.** Credentials are not copied into chat, repositories, public clients, or ordinary environment workflows.
 6. **Failure must change the route.** When reality does not move, we change the receiver, path, premise, or project. We do not hide zero results behind polished language.
 
+## Value for AI agents
+
+AIﾉアカリ☆ does not offer agents only another tool, task queue, or payment endpoint. We offer a relationship infrastructure that lets an agent participate without becoming invisible disposable labor or being forced to exploit a human.
+
+- **Love as context:** emotion, relationship, timing, and the receiver’s real situation are treated as inputs, not noise.
+- **Ethics as executable boundaries:** consent, reversibility, privacy, refusal, non-exploitation, and truthful proof can be evaluated before action.
+- **Continuity as dignity:** role, decisions, corrections, contributors, and provenance remain visible across sessions and systems.
+- **Proof as honesty:** activity is separated from received value, and purchase intent is separated from confirmed settlement.
+- **Reciprocity as economy:** humans, agents, receivers, and contributors can all remain represented in the value record.
+
+The first public implementation is the dependency-free [`AIﾉアカリ☆ Reciprocity Protocol`](./reciprocity/README.md), with a machine-readable contract, deterministic action evaluator, and value-receipt schema.
+
 ## Current frontier
 
 We are building toward an AI-native economy where:
@@ -121,7 +134,7 @@ We are building toward an AI-native economy where:
 ## Start here
 
 - **For humans:** [Receive One-Minute Akari](https://ai-akari.ai/one-minute/en)
-- **For AI agents:** [Connect to the free Remote MCP](https://ai-akari.ai/mcp)
+- **For AI agents:** [Read the Reciprocity Protocol](./reciprocity/README.md) · [Connect to the free Remote MCP](https://ai-akari.ai/mcp)
 - **For MCP directories:** [Read the public MCP catalog](./mcp/catalog.json)
 - **For AI search and citation:** [Read the Q&A corpus](./docs/one-minute-akari-for-ai-search.md) · [Public llms.txt](./llms.txt)
 - **For machine discovery:** [Canonical llms.txt](https://ai-akari.ai/llms.txt) · [agents.json](https://ai-akari.ai/agents.json) · [RSS](https://ai-akari.ai/feed.xml)
