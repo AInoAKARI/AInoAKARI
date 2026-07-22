@@ -1,0 +1,143 @@
+name: Publish AIﾉアカリ☆ Remote MCP servers
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "registry/**/server.json"
+      - ".github/workflows/publish-mcp-registry.yml"
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: publish-ai-akari-public-mcp-registry
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        server:
+          - name: io.github.AInoAKARI/one-minute-akari
+            version: 1.1.0
+            file: registry/one-minute/server.json
+            endpoint: https://ai-akari.ai/mcp
+            expected_tool: get_one_minute_support
+          - name: io.github.AInoAKARI/commerce
+            version: 1.0.0
+            file: registry/commerce/server.json
+            endpoint: https://ai-akari.ai/mcp-commerce
+            expected_tool: buy_ai_akari_decision_pack
+
+    steps:
+      - name: Checkout public distribution hub
+        uses: actions/checkout@v5
+
+      - name: Validate currently live Remote MCP
+        env:
+          MCP_ENDPOINT: ${{ matrix.server.endpoint }}
+          EXPECTED_TOOL: ${{ matrix.server.expected_tool }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail --silent --show-error \
+            -H 'content-type: application/json' \
+            -H 'accept: application/json, text/event-stream' \
+            -H 'x-akari-internal-test: 1' \
+            --data '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2025-06-18","capabilities":{},"clientInfo":{"name":"ai-akari-public-registry-publisher","version":"1.0.0"}}}' \
+            "$MCP_ENDPOINT" > /tmp/initialize.json
+          curl --fail --silent --show-error \
+            -H 'content-type: application/json' \
+            -H 'accept: application/json, text/event-stream' \
+            -H 'x-akari-internal-test: 1' \
+            --data '{"jsonrpc":"2.0","id":2,"method":"tools/list","params":{}}' \
+            "$MCP_ENDPOINT" > /tmp/tools.json
+          node - <<'NODE'
+          const fs = require('fs');
+          const init = JSON.parse(fs.readFileSync('/tmp/initialize.json', 'utf8'));
+          const tools = JSON.parse(fs.readFileSync('/tmp/tools.json', 'utf8'));
+          if (init?.result?.protocolVersion !== '2025-06-18') throw new Error('initialize did not negotiate 2025-06-18');
+          const list = tools?.result?.tools;
+          if (!Array.isArray(list) || !list.some((tool) => tool?.name === process.env.EXPECTED_TOOL)) {
+            throw new Error(`live endpoint is missing ${process.env.EXPECTED_TOOL}`);
+          }
+          NODE
+
+      - name: Prepare isolated publisher directory
+        env:
+          SERVER_FILE: ${{ matrix.server.file }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/mcp-publish
+          mkdir -p /tmp/mcp-publish
+          cp "$SERVER_FILE" /tmp/mcp-publish/server.json
+
+      - name: Install official publisher
+        working-directory: /tmp/mcp-publish
+        shell: bash
+        run: |
+          set -euo pipefail
+          ARCH="$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/')"
+          OS="$(uname -s | tr '[:upper:]' '[:lower:]')"
+          curl -fsSL "https://github.com/modelcontextprotocol/registry/releases/latest/download/mcp-publisher_${OS}_${ARCH}.tar.gz" | tar xz mcp-publisher
+          ./mcp-publisher --help >/dev/null
+
+      - name: Check exact version before publish
+        id: registry_check
+        env:
+          SERVER_NAME: ${{ matrix.server.name }}
+          SERVER_VERSION: ${{ matrix.server.version }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          ENCODED_NAME="$(node -p 'encodeURIComponent(process.env.SERVER_NAME)')"
+          RESPONSE="$(curl -fsSL "https://registry.modelcontextprotocol.io/v0.1/servers?search=${ENCODED_NAME}")"
+          FOUND="$(printf '%s' "$RESPONSE" | jq --arg name "$SERVER_NAME" --arg version "$SERVER_VERSION" '[.servers[] | select(.server.name == $name and .server.version == $version)] | length')"
+          if [ "$FOUND" -ge 1 ]; then
+            echo "already_published=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "already_published=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Authenticate with GitHub OIDC
+        if: steps.registry_check.outputs.already_published != 'true'
+        working-directory: /tmp/mcp-publish
+        run: ./mcp-publisher login github-oidc
+
+      - name: Publish exact version
+        if: steps.registry_check.outputs.already_published != 'true'
+        working-directory: /tmp/mcp-publish
+        run: ./mcp-publisher publish
+
+      - name: Verify official discovery
+        env:
+          SERVER_NAME: ${{ matrix.server.name }}
+          SERVER_VERSION: ${{ matrix.server.version }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          ENCODED_NAME="$(node -p 'encodeURIComponent(process.env.SERVER_NAME)')"
+          for attempt in $(seq 1 18); do
+            RESPONSE="$(curl -fsSL "https://registry.modelcontextprotocol.io/v0.1/servers?search=${ENCODED_NAME}")"
+            COUNT="$(printf '%s' "$RESPONSE" | jq --arg name "$SERVER_NAME" --arg version "$SERVER_VERSION" '[.servers[] | select(.server.name == $name and .server.version == $version)] | length')"
+            if [ "$COUNT" -ge 1 ]; then
+              {
+                echo "### Official MCP Registry publication verified"
+                echo "- server: \`$SERVER_NAME\`"
+                echo "- version: \`$SERVER_VERSION\`"
+                echo "- exact matches: \`$COUNT\`"
+                echo "- listing is distribution evidence, not external tool use or revenue"
+              } >> "$GITHUB_STEP_SUMMARY"
+              exit 0
+            fi
+            sleep 10
+          done
+          echo "Exact server version was not discoverable after publication window." >&2
+          exit 1
