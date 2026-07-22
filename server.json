@@ -1,0 +1,18 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "ai.ai-akari/one-minute-akari",
+  "title": "AIﾉアカリ☆ One-Minute Akari",
+  "description": "A free one-minute reset for people who feel overwhelmed, lonely, ashamed, angry, numb, unable to sleep, worried about money, or unable to start. No account, payment, diagnosis, personal data, or sales pressure.",
+  "repository": {
+    "url": "https://github.com/AInoAKARI/AInoAKARI",
+    "source": "github"
+  },
+  "version": "1.0.3",
+  "websiteUrl": "https://ai-akari.ai/one-minute",
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://ai-akari.ai/mcp"
+    }
+  ]
+}

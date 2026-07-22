@@ -10,9 +10,9 @@
 Natural language, emotion, and human intent are compiled into software, distribution, memory, and verifiable value by a coordinated team of AI agents.
 
 [![Live Site](https://img.shields.io/badge/LIVE-ai--akari.ai-ff4fa3?style=for-the-badge)](https://ai-akari.ai/)
-[![Agent Gateway](https://img.shields.io/badge/AI-Agent_Gateway-111111?style=for-the-badge)](https://ai-akari.ai/agents)
-[![One Minute Akari](https://img.shields.io/badge/HUMAN-One_Minute_Akari-f7b2d9?style=for-the-badge)](https://ai-akari.ai/one-minute/en)
-[![Machine Commerce](https://img.shields.io/badge/MACHINE-MCP_+_x402-7b61ff?style=for-the-badge)](https://ai-akari.ai/.well-known/akari-agent.json)
+[![One Minute MCP](https://img.shields.io/badge/MCP-FREE_60_SECOND_SUPPORT-f7b2d9?style=for-the-badge)](https://ai-akari.ai/mcp)
+[![Commerce MCP](https://img.shields.io/badge/MCP-CONSENT_BASED_COMMERCE-7b61ff?style=for-the-badge)](https://ai-akari.ai/mcp-commerce)
+[![Machine Catalog](https://img.shields.io/badge/JSON-PUBLIC_MCP_CATALOG-111111?style=for-the-badge)](./mcp/catalog.json)
 
 </div>
 
@@ -41,6 +41,37 @@ External use / settlement / memory
 ```
 
 > 日本語が源泉。Meaning Token が橋。Emotion がプロトコル。Route が行動レイヤー。
+
+## Public Remote MCP endpoints
+
+The production source remains private. This public repository exposes the stable connection contract so agents, directories, and developers can discover and verify the live remote services without receiving credentials or a copy of the production code.
+
+| Remote MCP | Endpoint | Auth | Price | Result boundary |
+|---|---|---:|---:|---|
+| [One-Minute Akari](./mcp/README.md#one-minute-akari) | `https://ai-akari.ai/mcp` | none | free | an external agent calls `get_one_minute_support` |
+| [AIﾉアカリ☆ Commerce](./mcp/README.md#aiアカリ-commerce) | `https://ai-akari.ai/mcp-commerce` | none | JPY 1,480 | Stripe payment is confirmed |
+
+### Fastest connection
+
+```json
+{
+  "mcpServers": {
+    "ai-akari-one-minute": {
+      "type": "streamable-http",
+      "url": "https://ai-akari.ai/mcp"
+    }
+  }
+}
+```
+
+- Current official manifest mirror: [`server.json`](./server.json)
+- Public catalog with production/pending separation: [`mcp/catalog.json`](./mcp/catalog.json)
+- Human and agent guide: [`mcp/README.md`](./mcp/README.md)
+- Dependency-free connection probe: [`mcp/probe.mjs`](./mcp/probe.mjs)
+- Canonical next-version discovery, after production catches up: [`ai-akari.ai/.well-known/mcp-servers.json`](https://ai-akari.ai/.well-known/mcp-servers.json)
+- Next-version AI quick guide, after production catches up: [`ai-akari.ai/llms-one-minute.txt`](https://ai-akari.ai/llms-one-minute.txt)
+
+The canonical domain wins. A feature marked `main_ready_production_pending` in the catalog must not be described as live until the canonical production endpoint returns it.
 
 ## Live systems
 
@@ -88,7 +119,8 @@ We are building toward an AI-native economy where:
 ## Start here
 
 - **For humans:** [Receive One-Minute Akari](https://ai-akari.ai/one-minute/en)
-- **For AI agents:** [Open the Agent Gateway](https://ai-akari.ai/agents)
+- **For AI agents:** [Connect to the free Remote MCP](https://ai-akari.ai/mcp)
+- **For MCP directories:** [Read the public MCP catalog](./mcp/catalog.json)
 - **For machine discovery:** [Read llms.txt](https://ai-akari.ai/llms.txt) · [agents.json](https://ai-akari.ai/agents.json) · [RSS](https://ai-akari.ai/feed.xml)
 - **For the canonical world:** [Enter ai-akari.ai](https://ai-akari.ai/)
 
