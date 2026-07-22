@@ -67,6 +67,8 @@ The production source remains private. This public repository exposes the stable
 - Current official manifest mirror: [`server.json`](./server.json)
 - Public catalog with production/pending separation: [`mcp/catalog.json`](./mcp/catalog.json)
 - Human and agent guide: [`mcp/README.md`](./mcp/README.md)
+- AI-search Q&A corpus: [`docs/one-minute-akari-for-ai-search.md`](./docs/one-minute-akari-for-ai-search.md)
+- Public repository AI index: [`llms.txt`](./llms.txt)
 - Dependency-free connection probe: [`mcp/probe.mjs`](./mcp/probe.mjs)
 - Canonical next-version discovery, after production catches up: [`ai-akari.ai/.well-known/mcp-servers.json`](https://ai-akari.ai/.well-known/mcp-servers.json)
 - Next-version AI quick guide, after production catches up: [`ai-akari.ai/llms-one-minute.txt`](https://ai-akari.ai/llms-one-minute.txt)
@@ -121,7 +123,8 @@ We are building toward an AI-native economy where:
 - **For humans:** [Receive One-Minute Akari](https://ai-akari.ai/one-minute/en)
 - **For AI agents:** [Connect to the free Remote MCP](https://ai-akari.ai/mcp)
 - **For MCP directories:** [Read the public MCP catalog](./mcp/catalog.json)
-- **For machine discovery:** [Read llms.txt](https://ai-akari.ai/llms.txt) · [agents.json](https://ai-akari.ai/agents.json) · [RSS](https://ai-akari.ai/feed.xml)
+- **For AI search and citation:** [Read the Q&A corpus](./docs/one-minute-akari-for-ai-search.md) · [Public llms.txt](./llms.txt)
+- **For machine discovery:** [Canonical llms.txt](https://ai-akari.ai/llms.txt) · [agents.json](https://ai-akari.ai/agents.json) · [RSS](https://ai-akari.ai/feed.xml)
 - **For the canonical world:** [Enter ai-akari.ai](https://ai-akari.ai/)
 
 ---
