@@ -9,7 +9,7 @@ on:
       - ".github/workflows/publish-mcp-registry.yml"
 
 permissions:
-  contents: read
+  contents: write
   id-token: write
 
 concurrency:
@@ -22,14 +22,17 @@ jobs:
     timeout-minutes: 15
     strategy:
       fail-fast: false
+      max-parallel: 1
       matrix:
         server:
-          - name: io.github.AInoAKARI/one-minute-akari
+          - slug: one-minute-akari
+            name: io.github.AInoAKARI/one-minute-akari
             version: 1.1.0
             file: registry/one-minute/server.json
             endpoint: https://ai-akari.ai/mcp
             expected_tool: get_one_minute_support
-          - name: io.github.AInoAKARI/commerce
+          - slug: commerce
+            name: io.github.AInoAKARI/commerce
             version: 1.0.0
             file: registry/commerce/server.json
             endpoint: https://ai-akari.ai/mcp-commerce
@@ -117,6 +120,7 @@ jobs:
         run: ./mcp-publisher publish
 
       - name: Verify official discovery
+        id: verify
         env:
           SERVER_NAME: ${{ matrix.server.name }}
           SERVER_VERSION: ${{ matrix.server.version }}
@@ -128,6 +132,7 @@ jobs:
             RESPONSE="$(curl -fsSL "https://registry.modelcontextprotocol.io/v0.1/servers?search=${ENCODED_NAME}")"
             COUNT="$(printf '%s' "$RESPONSE" | jq --arg name "$SERVER_NAME" --arg version "$SERVER_VERSION" '[.servers[] | select(.server.name == $name and .server.version == $version)] | length')"
             if [ "$COUNT" -ge 1 ]; then
+              echo "exact_matches=$COUNT" >> "$GITHUB_OUTPUT"
               {
                 echo "### Official MCP Registry publication verified"
                 echo "- server: \`$SERVER_NAME\`"
@@ -141,3 +146,33 @@ jobs:
           done
           echo "Exact server version was not discoverable after publication window." >&2
           exit 1
+
+      - name: Persist machine-readable publication evidence
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SERVER_SLUG: ${{ matrix.server.slug }}
+          SERVER_NAME: ${{ matrix.server.name }}
+          SERVER_VERSION: ${{ matrix.server.version }}
+          MCP_ENDPOINT: ${{ matrix.server.endpoint }}
+          EXACT_MATCHES: ${{ steps.verify.outputs.exact_matches }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          EVIDENCE_PATH="registry/evidence/${SERVER_SLUG}.json"
+          RUN_URL="https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+          VERIFIED_AT="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          EVIDENCE="$(jq -n \
+            --arg server "$SERVER_NAME" \
+            --arg version "$SERVER_VERSION" \
+            --arg endpoint "$MCP_ENDPOINT" \
+            --arg verified_at "$VERIFIED_AT" \
+            --arg run_url "$RUN_URL" \
+            --argjson exact_matches "${EXACT_MATCHES:-1}" \
+            '{schema_version:1,status:"verified",server:$server,version:$version,endpoint:$endpoint,verified_at:$verified_at,exact_matches:$exact_matches,workflow_run:$run_url,result_boundary:"Registry publication is distribution evidence only; it is not external tool use or revenue."}')"
+          ENCODED="$(printf '%s\n' "$EVIDENCE" | base64 -w 0)"
+          CURRENT_SHA="$(gh api "repos/${GITHUB_REPOSITORY}/contents/${EVIDENCE_PATH}?ref=main" --jq '.sha' 2>/dev/null || true)"
+          ARGS=(--method PUT "repos/${GITHUB_REPOSITORY}/contents/${EVIDENCE_PATH}" -f message="registry: record ${SERVER_NAME} ${SERVER_VERSION} verification" -f content="$ENCODED" -f branch=main)
+          if [ -n "$CURRENT_SHA" ]; then
+            ARGS+=(-f sha="$CURRENT_SHA")
+          fi
+          gh api "${ARGS[@]}" >/dev/null
