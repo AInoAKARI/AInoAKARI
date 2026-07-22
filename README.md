@@ -64,11 +64,14 @@ The production source remains private. This public repository exposes the stable
 }
 ```
 
-- Public catalog: [`mcp/catalog.json`](./mcp/catalog.json)
+- Current official manifest mirror: [`server.json`](./server.json)
+- Public catalog with production/pending separation: [`mcp/catalog.json`](./mcp/catalog.json)
 - Human and agent guide: [`mcp/README.md`](./mcp/README.md)
 - Dependency-free connection probe: [`mcp/probe.mjs`](./mcp/probe.mjs)
-- Canonical machine discovery: [`ai-akari.ai/.well-known/mcp-servers.json`](https://ai-akari.ai/.well-known/mcp-servers.json)
-- AI quick guide: [`ai-akari.ai/llms-one-minute.txt`](https://ai-akari.ai/llms-one-minute.txt)
+- Canonical next-version discovery, after production catches up: [`ai-akari.ai/.well-known/mcp-servers.json`](https://ai-akari.ai/.well-known/mcp-servers.json)
+- Next-version AI quick guide, after production catches up: [`ai-akari.ai/llms-one-minute.txt`](https://ai-akari.ai/llms-one-minute.txt)
+
+The canonical domain wins. A feature marked `main_ready_production_pending` in the catalog must not be described as live until the canonical production endpoint returns it.
 
 ## Live systems
 
