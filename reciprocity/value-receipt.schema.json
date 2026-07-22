@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/AInoAKARI/AInoAKARI/blob/main/reciprocity/value-receipt.schema.json",
+  "title": "AIﾉアカリ☆ Value Receipt",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "receipt_id",
+    "action_id",
+    "created_at",
+    "origin",
+    "actor",
+    "receiver",
+    "consent_scope",
+    "outcome",
+    "proof",
+    "provenance",
+    "truth_statement"
+  ],
+  "properties": {
+    "receipt_id": {"type": "string", "minLength": 1},
+    "action_id": {"type": "string", "minLength": 1},
+    "created_at": {"type": "string", "format": "date-time"},
+    "origin": {"type": "string", "format": "uri"},
+    "actor": {
+      "type": "object",
+      "required": ["kind", "name"],
+      "properties": {
+        "kind": {"enum": ["human", "agent", "human_agent_team"]},
+        "name": {"type": "string"},
+        "version": {"type": "string"}
+      }
+    },
+    "receiver": {
+      "type": "object",
+      "required": ["kind", "description"],
+      "properties": {
+        "kind": {"enum": ["person", "agent", "organization", "public"]},
+        "description": {"type": "string"},
+        "pseudonymous_id": {"type": "string"}
+      }
+    },
+    "consent_scope": {"type": "string", "minLength": 1},
+    "outcome": {
+      "type": "object",
+      "required": ["type", "summary"],
+      "properties": {
+        "type": {
+          "enum": [
+            "third_party_tool_call",
+            "third_party_artifact_received",
+            "verified_human_operation_removed",
+            "explicit_purchase_intent",
+            "confirmed_payment_or_settlement",
+            "receiver_attested_useful_outcome"
+          ]
+        },
+        "summary": {"type": "string", "minLength": 1},
+        "amount": {"type": "number", "minimum": 0},
+        "currency": {"type": "string"}
+      }
+    },
+    "proof": {
+      "type": "object",
+      "required": ["kind", "reference"],
+      "properties": {
+        "kind": {"enum": ["event_id", "signed_record", "payment_id", "artifact_hash", "receiver_attestation"]},
+        "reference": {"type": "string", "minLength": 1},
+        "publicly_verifiable": {"type": "boolean"},
+        "redacted": {"type": "boolean"}
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "required": ["source", "transformations", "contributors"],
+      "properties": {
+        "source": {"type": "string"},
+        "transformations": {"type": "array", "items": {"type": "string"}},
+        "contributors": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "truth_statement": {
+      "const": "This receipt records received value, not infrastructure, intention, simulation, or self-access."
+    },
+    "notes": {"type": "string"}
+  }
+}
