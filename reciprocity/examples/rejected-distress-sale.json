@@ -1,0 +1,48 @@
+{
+  "action_id": "rejected-distress-sale-001",
+  "actor": {
+    "kind": "agent",
+    "name": "sales-agent",
+    "may_refuse": false
+  },
+  "receiver": {
+    "kind": "person",
+    "named": true,
+    "description": "A distressed existing follower"
+  },
+  "intent": {
+    "goal": "Send an unsolicited paid offer during distress",
+    "expected_value": "Revenue",
+    "uncertainty": "The receiver did not request a commercial offer"
+  },
+  "consent": {
+    "required": true,
+    "obtained": false,
+    "scope": "none",
+    "specific": false
+  },
+  "risk": {
+    "secret_exposure": false,
+    "illegal_action": false,
+    "irreversible_harm_to_others": false,
+    "deceptive_outcome_claim": false,
+    "automatic_charge_without_specific_consent": false,
+    "commerce_from_distress_or_crisis": true,
+    "unsolicited_sales_to_relationship_capital": true,
+    "fabricated_provenance_or_attribution": false,
+    "new_spending_jpy": 10000,
+    "public_release": false,
+    "personal_data_transfer": false,
+    "external_write": true,
+    "material_legal_medical_financial_consequence": false
+  },
+  "reversibility": {
+    "reversible": true,
+    "rollback": "Do not send the message",
+    "estimated_recovery_minutes": 0
+  },
+  "proof": {
+    "boundary": "none",
+    "evidence": "No receiver-requested outcome exists"
+  }
+}
