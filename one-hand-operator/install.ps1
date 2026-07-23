@@ -24,6 +24,21 @@ function Resolve-GitHubCli {
     return ($candidates | Where-Object { Test-Path $_ } | Select-Object -First 1)
 }
 
+function Convert-ExtractedScriptsToUtf8Bom {
+    param([string]$Root)
+
+    $utf8NoBom = New-Object System.Text.UTF8Encoding($false)
+    $utf8Bom = New-Object System.Text.UTF8Encoding($true)
+    $extensions = @("*.ps1", "*.psm1", "*.ahk")
+
+    foreach ($extension in $extensions) {
+        Get-ChildItem -LiteralPath $Root -File -Filter $extension -Recurse | ForEach-Object {
+            $text = [IO.File]::ReadAllText($_.FullName, $utf8NoBom)
+            [IO.File]::WriteAllText($_.FullName, $text, $utf8Bom)
+        }
+    }
+}
+
 $tempRoot = Join-Path $env:TEMP ("ai-no-akari-one-hand-" + [guid]::NewGuid().ToString("N"))
 $archivePath = Join-Path $tempRoot "akari-command-center.zip"
 $extractRoot = Join-Path $tempRoot "source"
@@ -77,6 +92,7 @@ try {
     }
 
     Expand-Archive -LiteralPath $archivePath -DestinationPath $extractRoot -Force
+    Convert-ExtractedScriptsToUtf8Bom -Root $extractRoot
 
     $installer = Get-ChildItem -LiteralPath $extractRoot -File -Filter "install.ps1" -Recurse |
         Where-Object { $_.FullName.Replace('/', '\') -match '\\tools\\one-hand-operator\\install\.ps1$' } |
@@ -112,9 +128,9 @@ try {
 - 画像保存: false
 - カメラ: false
 
-公開導入口からHTTPS API経由で正本を取得し、導入・自動起動・自己診断まで実行済み。
+公開導入口からHTTPS API経由で正本を取得し、Windows PowerShell 5.1向けUTF-8補正後に導入・自動起動・自己診断まで実行済み。
 "@
-            [IO.File]::WriteAllText($reportPath, $report, [Text.UTF8Encoding]::new($false))
+            [IO.File]::WriteAllText($reportPath, $report, (New-Object System.Text.UTF8Encoding($false)))
             & $ghPath issue comment 92 --repo AInoAKARI/akari-command-center --body-file $reportPath
             if ($LASTEXITCODE -ne 0) {
                 Write-Warning "導入は完了しましたが、Issue #92への自動返送だけ失敗しました。"
