@@ -43,6 +43,40 @@ try {
     if ($LASTEXITCODE -ne 0) {
         throw "右手オペレーターの導入に失敗しました。終了コード: $LASTEXITCODE"
     }
+
+    Start-Sleep -Seconds 3
+    $installedRoot = Join-Path $env:LOCALAPPDATA "AI-no-Akari\OneHandOperator"
+    $statusScript = Join-Path $installedRoot "status.ps1"
+    if (Test-Path $statusScript) {
+        try {
+            $status = (& $statusScript | Out-String) | ConvertFrom-Json
+            $reportPath = Join-Path $tempRoot "issue-92-install-report.md"
+            $report = @"
+## Windows実機導入｜自動返送
+
+- 確認時刻: $($status.checked_at)
+- 右手オペレーター: $($status.one_hand_operator)
+- ローカルWhisper: $($status.local_whisper)
+- Windows音声fallback: $($status.windows_speech_fallback)
+- Codex dispatcher: $($status.dispatcher)
+- 常時音声一時停止: $($status.ambient_paused)
+- spool pending / processing / completed / discarded / failed: $($status.spool.pending) / $($status.spool.processing) / $($status.spool.completed) / $($status.spool.discarded) / $($status.spool.failed)
+- 生音声保存: false
+- 画像保存: false
+- カメラ: false
+
+公開導入口から正本を取得し、導入・自動起動・自己診断まで実行済み。
+"@
+            [IO.File]::WriteAllText($reportPath, $report, [Text.UTF8Encoding]::new($false))
+            & $gh.Source issue comment 92 --repo AInoAKARI/akari-command-center --body-file $reportPath
+            if ($LASTEXITCODE -ne 0) {
+                Write-Warning "導入は完了しましたが、Issue #92への自動返送だけ失敗しました。"
+            }
+        }
+        catch {
+            Write-Warning "導入は完了しましたが、状態の自動返送だけ失敗しました: $($_.Exception.Message)"
+        }
+    }
 }
 finally {
     Set-Location $env:TEMP
