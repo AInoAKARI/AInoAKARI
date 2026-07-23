@@ -7,13 +7,21 @@ function Resolve-GitHubCli {
         return $command.Source
     }
 
-    $candidates = @(
-        (Join-Path $env:ProgramFiles "GitHub CLI\gh.exe"),
-        (Join-Path ${env:ProgramFiles(x86)} "GitHub CLI\gh.exe"),
-        (Join-Path $env:LOCALAPPDATA "Programs\GitHub CLI\gh.exe")
-    ) | Where-Object { $_ -and (Test-Path $_) }
+    $candidates = @()
+    if ($env:ProgramFiles) {
+        $candidates += Join-Path $env:ProgramFiles "GitHub CLI\gh.exe"
+    }
 
-    return ($candidates | Select-Object -First 1)
+    $programFilesX86 = [Environment]::GetEnvironmentVariable("ProgramFiles(x86)")
+    if ($programFilesX86) {
+        $candidates += Join-Path $programFilesX86 "GitHub CLI\gh.exe"
+    }
+
+    if ($env:LOCALAPPDATA) {
+        $candidates += Join-Path $env:LOCALAPPDATA "Programs\GitHub CLI\gh.exe"
+    }
+
+    return ($candidates | Where-Object { Test-Path $_ } | Select-Object -First 1)
 }
 
 $tempRoot = Join-Path $env:TEMP ("ai-no-akari-one-hand-" + [guid]::NewGuid().ToString("N"))
