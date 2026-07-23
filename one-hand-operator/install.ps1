@@ -44,6 +44,35 @@ function Test-LivePidFile {
     return $null -ne (Get-Process -Id ([int]$raw) -ErrorAction SilentlyContinue)
 }
 
+function Invoke-NativeQuiet {
+    param(
+        [string]$FilePath,
+        [string[]]$ArgumentList,
+        [string]$WorkingDirectory
+    )
+
+    $previousPreference = $ErrorActionPreference
+    $ErrorActionPreference = "Continue"
+    try {
+        if ([string]::IsNullOrWhiteSpace($WorkingDirectory)) {
+            & $FilePath @ArgumentList *> $null
+            return $LASTEXITCODE
+        }
+
+        Push-Location $WorkingDirectory
+        try {
+            & $FilePath @ArgumentList *> $null
+            return $LASTEXITCODE
+        }
+        finally {
+            Pop-Location
+        }
+    }
+    finally {
+        $ErrorActionPreference = $previousPreference
+    }
+}
+
 function Ensure-CommandCenterWorkspace {
     param(
         [string]$GhPath,
@@ -53,8 +82,10 @@ function Ensure-CommandCenterWorkspace {
     $git = Get-Command git -ErrorAction SilentlyContinue
     if (-not $git) { return $false }
 
-    & $GhPath auth setup-git --hostname github.com 2>&1 | Out-Null
-    if ($LASTEXITCODE -ne 0) { return $false }
+    $setupExit = Invoke-NativeQuiet `
+        -FilePath $GhPath `
+        -ArgumentList @("auth", "setup-git", "--hostname", "github.com")
+    if ($setupExit -ne 0) { return $false }
 
     $target = Join-Path $WorkspaceRoot "akari-command-center"
     if (Test-Path (Join-Path $target "AGENTS.md")) { return $true }
@@ -64,8 +95,17 @@ function Ensure-CommandCenterWorkspace {
     }
     New-Item -ItemType Directory -Force -Path $WorkspaceRoot | Out-Null
 
-    & $git.Source clone --depth 1 https://github.com/AInoAKARI/akari-command-center.git $target 2>&1 | Out-Null
-    return ($LASTEXITCODE -eq 0 -and (Test-Path (Join-Path $target "AGENTS.md")))
+    $cloneExit = Invoke-NativeQuiet `
+        -FilePath $git.Source `
+        -ArgumentList @(
+            "clone",
+            "--depth", "1",
+            "https://github.com/AInoAKARI/akari-command-center.git",
+            $target
+        ) `
+        -WorkingDirectory $WorkspaceRoot
+
+    return ($cloneExit -eq 0 -and (Test-Path (Join-Path $target "AGENTS.md")))
 }
 
 $tempRoot = Join-Path $env:TEMP ("ai-no-akari-one-hand-" + [guid]::NewGuid().ToString("N"))
