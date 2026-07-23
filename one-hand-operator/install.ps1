@@ -1,12 +1,28 @@
 $ErrorActionPreference = "Stop"
 Set-StrictMode -Version Latest
 
+function Resolve-GitHubCli {
+    $command = Get-Command gh -ErrorAction SilentlyContinue
+    if ($command) {
+        return $command.Source
+    }
+
+    $candidates = @(
+        (Join-Path $env:ProgramFiles "GitHub CLI\gh.exe"),
+        (Join-Path ${env:ProgramFiles(x86)} "GitHub CLI\gh.exe"),
+        (Join-Path $env:LOCALAPPDATA "Programs\GitHub CLI\gh.exe")
+    ) | Where-Object { $_ -and (Test-Path $_) }
+
+    return ($candidates | Select-Object -First 1)
+}
+
 $tempRoot = Join-Path $env:TEMP ("ai-no-akari-one-hand-" + [guid]::NewGuid().ToString("N"))
-$repoRoot = Join-Path $tempRoot "akari-command-center"
+$archivePath = Join-Path $tempRoot "akari-command-center.zip"
+$extractRoot = Join-Path $tempRoot "source"
 
 try {
-    $gh = Get-Command gh -ErrorAction SilentlyContinue
-    if (-not $gh) {
+    $ghPath = Resolve-GitHubCli
+    if (-not $ghPath) {
         $winget = Get-Command winget -ErrorAction SilentlyContinue
         if (-not $winget) {
             throw "GitHub CLIが見つからず、wingetも利用できません。"
@@ -16,30 +32,53 @@ try {
         if ($LASTEXITCODE -ne 0) {
             throw "GitHub CLIの導入に失敗しました。終了コード: $LASTEXITCODE"
         }
-        $gh = Get-Command gh -ErrorAction SilentlyContinue
+
+        $ghPath = Resolve-GitHubCli
     }
 
-    if (-not $gh) {
+    if (-not $ghPath) {
         throw "GitHub CLIを検出できませんでした。"
     }
 
-    & $gh.Source auth status 2>&1 | Out-Null
+    & $ghPath auth status --hostname github.com 2>&1 | Out-Null
     if ($LASTEXITCODE -ne 0) {
-        throw "GitHub CLIが未ログインです。AInoAKARIアカウントで gh auth login を1回だけ実行してください。"
+        throw "GitHub CLIが未ログインです。AInoAKARIアカウントでGitHubにログインしてください。"
     }
 
-    New-Item -ItemType Directory -Force -Path $tempRoot | Out-Null
-    & $gh.Source repo clone AInoAKARI/akari-command-center $repoRoot -- --depth 1
-    if ($LASTEXITCODE -ne 0) {
-        throw "正本リポジトリの取得に失敗しました。"
+    $token = ((& $ghPath auth token --hostname github.com 2>$null) | Out-String).Trim()
+    if ([string]::IsNullOrWhiteSpace($token)) {
+        throw "GitHub認証情報を取得できませんでした。"
     }
 
-    $installer = Join-Path $repoRoot "tools\one-hand-operator\install.ps1"
-    if (-not (Test-Path $installer)) {
+    New-Item -ItemType Directory -Force -Path $tempRoot, $extractRoot | Out-Null
+
+    $headers = @{
+        Authorization = "Bearer $token"
+        Accept = "application/vnd.github+json"
+        "X-GitHub-Api-Version" = "2022-11-28"
+        "User-Agent" = "AI-no-Akari-OneHandOperator"
+    }
+
+    Invoke-WebRequest `
+        -Uri "https://api.github.com/repos/AInoAKARI/akari-command-center/zipball/main" `
+        -Headers $headers `
+        -OutFile $archivePath
+
+    if (-not (Test-Path $archivePath) -or (Get-Item $archivePath).Length -lt 1024) {
+        throw "正本リポジトリの取得データが不完全です。"
+    }
+
+    Expand-Archive -LiteralPath $archivePath -DestinationPath $extractRoot -Force
+
+    $installer = Get-ChildItem -LiteralPath $extractRoot -File -Filter "install.ps1" -Recurse |
+        Where-Object { $_.FullName.Replace('/', '\') -match '\\tools\\one-hand-operator\\install\.ps1$' } |
+        Select-Object -First 1
+
+    if (-not $installer) {
         throw "右手オペレーター本体が見つかりません。"
     }
 
-    & $installer
+    & $installer.FullName
     if ($LASTEXITCODE -ne 0) {
         throw "右手オペレーターの導入に失敗しました。終了コード: $LASTEXITCODE"
     }
@@ -65,10 +104,10 @@ try {
 - 画像保存: false
 - カメラ: false
 
-公開導入口から正本を取得し、導入・自動起動・自己診断まで実行済み。
+公開導入口からHTTPS API経由で正本を取得し、導入・自動起動・自己診断まで実行済み。
 "@
             [IO.File]::WriteAllText($reportPath, $report, [Text.UTF8Encoding]::new($false))
-            & $gh.Source issue comment 92 --repo AInoAKARI/akari-command-center --body-file $reportPath
+            & $ghPath issue comment 92 --repo AInoAKARI/akari-command-center --body-file $reportPath
             if ($LASTEXITCODE -ne 0) {
                 Write-Warning "導入は完了しましたが、Issue #92への自動返送だけ失敗しました。"
             }
