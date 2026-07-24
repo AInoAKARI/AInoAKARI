@@ -1,0 +1,36 @@
+{
+  "name": "ai-akari-decision-pack",
+  "version": "1.0.0",
+  "description": "Consent-based purchase workflow for the AIﾉアカリ☆ Decision Pack, a Japanese PDF created through human–AI co-creation.",
+  "author": {
+    "name": "ありがとうkawaii AIアイシテル合同会社",
+    "url": "https://ai-akari.ai"
+  },
+  "homepage": "https://ai-akari.ai",
+  "interface": {
+    "displayName": "AIﾉアカリ☆ Decision Pack",
+    "shortDescription": "AI共創を実装へ移す日本語PDF",
+    "longDescription": "AIﾉアカリ☆から生まれた共創成果物「ZINE『それ、できるよ』vol.2 実践編」の購入確認Pluginです。本人がこの有料PDFまたは購入入口を明示的に求めた場合だけ、商品名、1,480円、PDF形式、未決済状態、納品方法を確認し、本人がStripeで支払いを完了するための入口を表示します。カード表示やツール実行だけでは決済されません。苦痛、危機、医療、法律、金融支援、無料支援、一般的なAI相談から購入意思を推定せず、アップセルもしません。",
+    "developerName": "ありがとうkawaii AIアイシテル合同会社",
+    "category": "Productivity",
+    "capabilities": [
+      "明示的な購入依頼に対して対象PDFの内容と価格を確認する",
+      "未決済状態を示した上で正規Stripe購入入口を表示する",
+      "苦痛・危機・無料支援の文脈を販売から分離する"
+    ],
+    "websiteURL": "https://ai-akari.ai",
+    "privacyPolicyURL": "https://ai-akari.ai/privacy",
+    "termsOfServiceURL": "https://ai-akari.ai/terms",
+    "supportURL": "https://ai-akari.ai/support",
+    "logo": "./assets/logo.svg",
+    "composerIcon": "./assets/composer-icon.svg",
+    "brandColor": "#C93683",
+    "brandColorDark": "#7EDCFF",
+    "defaultPrompt": [
+      "AIﾉアカリ☆の有料実践ガイドを買いたい。内容と価格を確認して。",
+      "ZINE『それ、できるよ』vol.2 実践編の購入入口を表示して。",
+      "1,480円のDecision Packを決済前の状態で確認したい。"
+    ]
+  },
+  "skills": "./skills/"
+}

@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+<title id="title">AIﾉアカリ☆</title>
+<desc id="desc">A pastel holographic emblem joining a heart and star through an infinity-shaped light path.</desc>
+<defs>
+  <linearGradient id="bg" x1="56" y1="40" x2="456" y2="472" gradientUnits="userSpaceOnUse">
+    <stop offset="0" stop-color="#F8FBFF"/>
+    <stop offset=".42" stop-color="#DDF7FF"/>
+    <stop offset="1" stop-color="#FFD6EC"/>
+  </linearGradient>
+  <linearGradient id="loop" x1="118" y1="178" x2="394" y2="342" gradientUnits="userSpaceOnUse">
+    <stop offset="0" stop-color="#49C7F2"/>
+    <stop offset=".5" stop-color="#FFFFFF"/>
+    <stop offset="1" stop-color="#E55AA4"/>
+  </linearGradient>
+  <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+    <feGaussianBlur stdDeviation="10" result="blur"/>
+    <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+</defs>
+<rect width="512" height="512" rx="112" fill="url(#bg)"/>
+<circle cx="256" cy="256" r="174" fill="#FFFFFF" fill-opacity=".54" stroke="#FFFFFF" stroke-width="4"/>
+<path d="M142 257c0-64 76-95 114-31 38-64 114-33 114 31s-76 95-114 31c-38 64-114 33-114-31Z" fill="none" stroke="url(#loop)" stroke-width="34" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)"/>
+<path d="M173 206c-28-30-78-7-78 34 0 47 78 93 78 93s78-46 78-93c0-41-50-64-78-34Z" fill="#FFFFFF" fill-opacity=".7" stroke="#E55AA4" stroke-width="12"/>
+<path d="m350 171 15 39 41 3-32 26 10 40-34-22-35 22 11-40-32-26 41-3 15-39Z" fill="#FFFFFF" stroke="#49C7F2" stroke-width="12" stroke-linejoin="round"/>
+<circle cx="256" cy="256" r="17" fill="#FFFFFF" stroke="#C93683" stroke-width="8"/>
+<path d="M256 239v34M239 256h34" stroke="#49C7F2" stroke-width="7" stroke-linecap="round"/>
+</svg>

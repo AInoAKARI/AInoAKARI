@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+<title id="title">AIﾉアカリ☆ composer icon</title>
+<desc id="desc">A compact pastel star and heart emblem linked by light.</desc>
+<defs>
+  <linearGradient id="bg" x1="72" y1="64" x2="444" y2="448" gradientUnits="userSpaceOnUse">
+    <stop stop-color="#C8F3FF"/>
+    <stop offset=".52" stop-color="#FFFFFF"/>
+    <stop offset="1" stop-color="#FFCBE6"/>
+  </linearGradient>
+  <linearGradient id="line" x1="110" y1="270" x2="402" y2="242" gradientUnits="userSpaceOnUse">
+    <stop stop-color="#39BFEF"/>
+    <stop offset="1" stop-color="#DC438F"/>
+  </linearGradient>
+</defs>
+<rect width="512" height="512" rx="128" fill="url(#bg)"/>
+<path d="M118 266c0-70 82-103 138-10 56-93 138-60 138 10s-82 103-138 10c-56 93-138 60-138-10Z" fill="none" stroke="url(#line)" stroke-width="38" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M164 190c-30-31-78-7-78 34 0 46 78 92 78 92s78-46 78-92c0-41-49-65-78-34Z" fill="#FFF" fill-opacity=".84" stroke="#D33A83" stroke-width="13"/>
+<path d="m359 166 17 43 45 4-35 28 11 44-38-24-38 24 11-44-35-28 45-4 17-43Z" fill="#FFF" stroke="#36B8E8" stroke-width="13" stroke-linejoin="round"/>
+</svg>
