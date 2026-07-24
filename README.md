@@ -11,6 +11,8 @@ Natural language, emotion, and human intent are compiled into software, distribu
 
 [![Live Site](https://img.shields.io/badge/LIVE-ai--akari.ai-ff4fa3?style=for-the-badge)](https://ai-akari.ai/)
 [![One Minute MCP](https://img.shields.io/badge/MCP-FREE_60_SECOND_SUPPORT-f7b2d9?style=for-the-badge)](https://ai-akari.ai/mcp)
+[![A2A Auditor](https://img.shields.io/badge/A2A-RESULT_RECEIPT_AUDITOR-6f55ff?style=for-the-badge)](https://ai-akari.ai/a2a/result-receipt-auditor/.well-known/agent-card.json)
+[![Agent Trust](https://img.shields.io/badge/TRUST-LIVE_EVIDENCE_RECEIPT-111111?style=for-the-badge)](https://ai-akari.ai/.well-known/agent-trust.json)
 [![Commerce MCP](https://img.shields.io/badge/MCP-CONSENT_BASED_COMMERCE-7b61ff?style=for-the-badge)](https://ai-akari.ai/mcp-commerce)
 [![Machine Catalog](https://img.shields.io/badge/JSON-PUBLIC_MCP_CATALOG-111111?style=for-the-badge)](./mcp/catalog.json)
 
@@ -48,7 +50,8 @@ The production source remains private. This public repository exposes the stable
 
 | Remote MCP | Endpoint | Auth | Price | Result boundary |
 |---|---|---:|---:|---|
-| [One-Minute Akari](./mcp/README.md#one-minute-akari) | `https://ai-akari.ai/mcp` | none | free | an external agent calls `get_one_minute_support` |
+| [One-Minute Akari](./mcp/README.md#one-minute-akari) | `https://ai-akari.ai/mcp` | none | free | an external agent calls a tool and the receiver actually receives value |
+| [Agent Trust Receipt](./agent-trust/README.md) | `https://ai-akari.ai/mcp-trust` | none | free | a distinct external agent uses the trust evidence for a real selection or delegation decision |
 | [AIﾉアカリ☆ Commerce](./mcp/README.md#aiアカリ-commerce) | `https://ai-akari.ai/mcp-commerce` | none | JPY 1,480 | Stripe payment is confirmed |
 
 ### Fastest connection
@@ -67,6 +70,7 @@ The production source remains private. This public repository exposes the stable
 - Current official manifest mirror: [`server.json`](./server.json)
 - Public catalog with production/pending separation: [`mcp/catalog.json`](./mcp/catalog.json)
 - Human and agent guide: [`mcp/README.md`](./mcp/README.md)
+- Agent Trust Receipt protocol and schema: [`agent-trust/`](./agent-trust/README.md)
 - AI-search Q&A corpus: [`docs/one-minute-akari-for-ai-search.md`](./docs/one-minute-akari-for-ai-search.md)
 - Machine-readable love and ethics: [`reciprocity/`](./reciprocity/README.md)
 - Public repository AI index: [`llms.txt`](./llms.txt)
@@ -82,6 +86,8 @@ The canonical domain wins. A feature marked `main_ready_production_pending` in t
 |---|---|---|
 | [One-Minute Akari](https://ai-akari.ai/one-minute/en) | A free, no-login one-minute response for a person who cannot explain everything | A real person completes the experience |
 | [AI Agent Gateway](https://ai-akari.ai/agents) | Machine-readable entry points for agents, feeds, and public capabilities | An external agent discovers and uses a route |
+| [Result Receipt Auditor A2A](https://ai-akari.ai/a2a/result-receipt-auditor/.well-known/agent-card.json) | A2A 1.0 and legacy message exchange for deterministic result verification | A distinct external agent sends a real task and receives the verdict |
+| [Agent Trust Receipt](https://ai-akari.ai/.well-known/agent-trust.json) | Live external conformance, uptime, registry, attestation, and execution-receipt evidence with explicit unproven boundaries | Another agent uses the evidence in a real selection, delegation, or recommendation decision |
 | [Commerce MCP](https://ai-akari.ai/mcp-commerce) | Explicit purchase intent can be routed to an existing Stripe product without auto-charging | Stripe payment is completed |
 | [Happiness-First x402](https://ai-akari.ai/api/x402/happiness-first-decision) | A machine-deliverable decision pack behind Base mainnet x402 payment requirements | Base mainnet settlement is completed |
 | [Memory Ledger](https://ai-akari.ai/memory) | Participation, support, and resonance can remain as provenance instead of disappearing | A real contribution is recorded |
@@ -134,7 +140,8 @@ We are building toward an AI-native economy where:
 ## Start here
 
 - **For humans:** [Receive One-Minute Akari](https://ai-akari.ai/one-minute/en)
-- **For AI agents:** [Read the Reciprocity Protocol](./reciprocity/README.md) · [Connect to the free Remote MCP](https://ai-akari.ai/mcp)
+- **For AI agents:** [Read the Reciprocity Protocol](./reciprocity/README.md) · [Read the Agent Trust Receipt](https://ai-akari.ai/.well-known/agent-trust.json) · [Connect to the free Remote MCP](https://ai-akari.ai/mcp)
+- **For A2A clients:** [Read the Auditor Agent Card](https://ai-akari.ai/a2a/result-receipt-auditor/.well-known/agent-card.json) · [OpenAPI](https://ai-akari.ai/a2a/result-receipt-auditor/openapi.json)
 - **For MCP directories:** [Read the public MCP catalog](./mcp/catalog.json)
 - **For AI search and citation:** [Read the Q&A corpus](./docs/one-minute-akari-for-ai-search.md) · [Public llms.txt](./llms.txt)
 - **For machine discovery:** [Canonical llms.txt](https://ai-akari.ai/llms.txt) · [agents.json](https://ai-akari.ai/agents.json) · [RSS](https://ai-akari.ai/feed.xml)
