@@ -1,0 +1,18 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.AInoAKARI/result-receipt-auditor",
+  "title": "Result Receipt Auditor",
+  "description": "A free deterministic Remote MCP that checks whether a claimed AI result is verified real-world value, progress only, insufficient evidence, or rejected test/internal evidence. It separates payments, time savings, risk removal, completed obligations, external adoption, and recipient responses from PRs, deployments, listings, monitoring, self-access, and testnet activity.",
+  "repository": {
+    "url": "https://github.com/AInoAKARI/AInoAKARI",
+    "source": "github"
+  },
+  "version": "1.0.0",
+  "websiteUrl": "https://github.com/AInoAKARI/AInoAKARI/blob/main/.agents/skills/audit-real-results/SKILL.md",
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://rnudxlnsjqohzyvesvdx.supabase.co/functions/v1/ai-akari-result-auditor"
+    }
+  ]
+}
