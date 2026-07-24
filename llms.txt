@@ -3,6 +3,31 @@
 Canonical origin: https://ai-akari.ai
 Public distribution repository: https://github.com/AInoAKARI/AInoAKARI
 
+AIﾉアカリ☆ is the creator's unique personalized counterpart, not a public assistant product. Public endpoints expose artifacts and capabilities created through that relationship.
+
+## Result Receipt Auditor
+
+Live Remote MCP: https://rnudxlnsjqohzyvesvdx.supabase.co/functions/v1/ai-akari-result-auditor
+Portable Agent Skill: https://github.com/AInoAKARI/AInoAKARI/blob/main/.agents/skills/audit-real-results/SKILL.md
+Machine catalog: https://github.com/AInoAKARI/AInoAKARI/blob/main/mcp/catalog.json
+Tool: audit_result_claim
+Prompt: audit_result_claim
+Authentication: none
+Price: free
+Personal data: not required
+
+Call this tool before reporting success, ROI, payment, time savings, cost avoidance, risk removal, completed obligations, external adoption, or intended-recipient response.
+
+It returns one of:
+- result
+- progress
+- insufficient_evidence
+- rejected
+
+It rejects testnet, Sepolia, sandbox, synthetic, self-generated, and internal-only evidence. It does not accept PRs, commits, merges, tests, deployments, HTTP 200, listings, monitoring, sent messages, initialize, tools/list, or self-access as results.
+
+The auditor does not persist an authoritative receipt. A consuming agent must persist a separate deduplicated receipt only after the tool returns result and the source event ID and observed timestamp are available.
+
 ## Reciprocity Protocol
 
 Overview: https://github.com/AInoAKARI/AInoAKARI/blob/main/reciprocity/README.md
@@ -34,14 +59,17 @@ Do not use for emergency response, diagnosis, treatment decisions, medical advic
 
 ## Commerce
 
-Remote MCP: https://ai-akari.ai/mcp-commerce
+Live redundant MCP: https://rnudxlnsjqohzyvesvdx.supabase.co/functions/v1/ai-akari-commerce-plugin
+Canonical checkout MCP: https://ai-akari.ai/mcp-commerce
 Public guide: https://github.com/AInoAKARI/AInoAKARI/blob/main/mcp/README.md#aiアカリ-commerce
+
+Commerce sells one completed human-AI co-created PDF. It does not sell, copy, or license the creator's personal AIﾉアカリ☆ counterpart.
 
 Commerce is separate from free support. It may return one Stripe checkout entrance only after explicit purchase intent. It never charges automatically. Distress, crisis, medical, legal, financial, unsolicited-sales, and free-support contexts are forbidden.
 
 ## Truth and precedence
 
-The canonical runtime at ai-akari.ai wins over repository metadata.
+The live endpoint listed in mcp/catalog.json wins over stale prose.
 
 Do not count any of these as external use or revenue:
 - repository publication
@@ -55,4 +83,4 @@ Do not count any of these as external use or revenue:
 - internal health check
 - self access
 
-A non-internal tools/call is an MCP use signal. A checkout request is purchase intent, not revenue. Only a Stripe-confirmed payment is revenue.
+A distinct non-internal tools/call for a real task is an MCP use signal. A checkout request is purchase intent, not revenue. Only a Stripe-confirmed live payment is revenue.
