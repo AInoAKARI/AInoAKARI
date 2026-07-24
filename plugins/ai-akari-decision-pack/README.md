@@ -4,12 +4,15 @@
 
 ## App
 
-- MCP endpoint: `https://ai-akari.ai/mcp-commerce`
-- Server card: `https://ai-akari.ai/.well-known/mcp-commerce.json`
+- Submission MCP endpoint: `https://rnudxlnsjqohzyvesvdx.supabase.co/functions/v1/ai-akari-commerce-plugin`
+- Canonical MCP endpoint: `https://ai-akari.ai/mcp-commerce`
+- Canonical server card: `https://ai-akari.ai/.well-known/mcp-commerce.json`
 - Tool: `buy_ai_akari_decision_pack`
 - Prompt: `buy_ai_akari_implementation_guide`
 - UI resource: `ui://ai-akari-commerce/decision-pack-card.html`
 - Authentication: none
+
+The live submission endpoint exposes the tool, prompt, and review card independently of the Vercel build queue. Purchase calls are proxied to the canonical endpoint so the existing checkout-request record and Stripe delivery flow remain authoritative.
 
 ## What it does
 
@@ -29,6 +32,10 @@
 ## Skill
 
 Agent Skills形式の正本は [`skill/SKILL.md`](./skill/SKILL.md) です。OpenAIのSkills画面では、このフォルダまたは配布ZIPをアップロードして利用できます。
+
+## Live verification
+
+2026-07-24に外部HTTPクライアントから、GET・initialize・tools/list・prompts/list・resources/list・resources/readの全てでHTTP 200を確認済みです。購入toolは偽のcheckout requestを作らないため、内部検収では呼んでいません。
 
 ## Review material
 
