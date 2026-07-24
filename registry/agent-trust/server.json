@@ -1,0 +1,18 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.AInoAKARI/agent-trust-receipt",
+  "title": "AIﾉアカリ☆ Agent Trust Receipt",
+  "description": "Read-only Remote MCP for externally grounded AI agent trust receipts.",
+  "repository": {
+    "url": "https://github.com/AInoAKARI/AInoAKARI",
+    "source": "github"
+  },
+  "version": "1.1.0",
+  "websiteUrl": "https://ai-akari.ai/.well-known/agent-trust.json",
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://ai-akari.ai/mcp-trust"
+    }
+  ]
+}
