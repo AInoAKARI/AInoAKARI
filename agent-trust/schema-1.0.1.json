@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ai-akari.ai/schemas/agent-trust-receipt-1.0.1.json",
+  "title": "AIﾉアカリ☆ Agent Trust Receipt",
+  "description": "A machine-readable bundle that separates self-published identity, independent conformance, availability, external attestation, marketplace state, verified executions, and explicitly unproven claims.",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["schema_version","subject","trust_level","assertions","externally_verified_executions","explicitly_not_proven_by_this_receipt","observed_at","digest_scope","evidence_digest_sha256"],
+  "properties": {
+    "schema_version": { "const": "ai-akari-agent-trust-receipt/1.0.1" },
+    "subject": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["name", "canonical_endpoint", "canonical_agent_card"],
+      "properties": {
+        "name": { "type": "string" },
+        "canonical_endpoint": { "type": "string", "format": "uri" },
+        "canonical_agent_card": { "type": "string", "format": "uri" },
+        "canonical_agentfacts": { "type": "string", "format": "uri" },
+        "openapi": { "type": "string", "format": "uri" },
+        "mcp_equivalent": { "type": "string", "format": "uri" }
+      }
+    },
+    "trust_level": {
+      "type": "string",
+      "enum": ["unavailable","self-published-with-partial-external-evidence","externally-conformance-verified","externally-conformance-verified-with-development-attestation"]
+    },
+    "assertions": { "type": "object", "additionalProperties": true },
+    "externally_verified_executions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "required": ["protocol","provider","receipt_id","operator_initiated_validation","organic_discovery"]
+      }
+    },
+    "explicitly_not_proven_by_this_receipt": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+    "evidence": { "type": "object", "additionalProperties": true },
+    "digest_semantics": { "type": "string" },
+    "observed_at": { "type": "string", "format": "date-time" },
+    "digest_scope": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+    "evidence_digest_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+  }
+}
