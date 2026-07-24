@@ -1,0 +1,33 @@
+name: Verify Agent Trust MCP
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/verify-agent-trust-mcp.yml"
+      - "agent-trust/verify-trust-mcp.mjs"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
+concurrency:
+  group: verify-agent-trust-mcp
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      TRUST_MCP_ENDPOINT: https://rnudxlnsjqohzyvesvdx.supabase.co/functions/v1/ai-akari-mcp-trust
+      GITHUB_TOKEN: ${{ github.token }}
+
+    steps:
+      - name: Check out public protocol
+        uses: actions/checkout@v4
+
+      - name: Execute external Trust MCP verification
+        run: node agent-trust/verify-trust-mcp.mjs
