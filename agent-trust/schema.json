@@ -1,111 +1,37 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://ai-akari.ai/schemas/agent-trust-receipt-1.0.1.json",
+  "$id": "https://ai-akari.ai/schemas/agent-trust-receipt-1.1.0.json",
   "title": "AIﾉアカリ☆ Agent Trust Receipt",
-  "description": "A machine-readable bundle that separates self-published identity, independent conformance, availability, external attestation, marketplace state, verified executions, and explicitly unproven claims.",
+  "description": "Latest schema for the machine-readable bundle that separates self-published identity, multi-provider conformance, availability, external attestation, marketplace state, verified executions, and explicitly unproven claims.",
   "type": "object",
   "additionalProperties": true,
-  "required": [
-    "schema_version",
-    "subject",
-    "trust_level",
-    "assertions",
-    "externally_verified_executions",
-    "explicitly_not_proven_by_this_receipt",
-    "observed_at",
-    "digest_scope",
-    "evidence_digest_sha256"
-  ],
+  "required": ["$schema","schema_version","subject","trust_level","assertions","externally_verified_executions","explicitly_not_proven_by_this_receipt","observed_at","digest_scope","evidence_digest_sha256"],
   "properties": {
-    "schema_version": {
-      "const": "ai-akari-agent-trust-receipt/1.0.1"
-    },
+    "$schema": { "const": "https://ai-akari.ai/schemas/agent-trust-receipt-1.1.0.json" },
+    "schema_version": { "const": "ai-akari-agent-trust-receipt/1.1.0" },
     "subject": {
       "type": "object",
       "additionalProperties": true,
-      "required": ["name", "canonical_endpoint", "canonical_agent_card"],
-      "properties": {
-        "name": { "type": "string" },
-        "canonical_endpoint": { "type": "string", "format": "uri" },
-        "canonical_agent_card": { "type": "string", "format": "uri" },
-        "canonical_agentfacts": { "type": "string", "format": "uri" },
-        "openapi": { "type": "string", "format": "uri" },
-        "mcp_equivalent": { "type": "string", "format": "uri" }
-      }
+      "required": ["name","canonical_endpoint","canonical_agent_card","canonical_agentfacts","openapi","mcp_equivalent","trust_mcp_canonical","trust_mcp_live_fallback"]
     },
     "trust_level": {
       "type": "string",
-      "enum": [
-        "unavailable",
-        "self-published-with-partial-external-evidence",
-        "externally-conformance-verified",
-        "externally-conformance-verified-with-development-attestation"
-      ]
+      "enum": ["unavailable","self-published-with-partial-external-evidence","externally-conformance-verified","externally-conformance-verified-with-development-attestation","multi-provider-conformance-verified-with-development-attestation"]
     },
-    "assertions": {
-      "type": "object",
-      "additionalProperties": true,
-      "properties": {
-        "canonical_card_available": { "type": "boolean" },
-        "canonical_card_version": { "type": ["string", "null"] },
-        "agent_card_valid": { "type": "boolean" },
-        "external_a2a_sdk_conformance_passed": { "type": "boolean" },
-        "external_a2a_task_category": { "type": ["string", "null"] },
-        "externally_healthy": { "type": "boolean" },
-        "external_uptime_percentage": { "type": ["number", "null"], "minimum": 0, "maximum": 100 },
-        "external_average_response_ms": { "type": ["number", "null"], "minimum": 0 },
-        "second_registry_status": { "type": ["string", "null"] },
-        "externally_signed_agentfacts": { "type": "boolean" },
-        "signed_agentfacts_issuer": { "type": ["string", "null"] },
-        "signed_agentfacts_environment": { "type": "string" },
-        "signed_agentfacts_subject_version": { "type": ["string", "null"] },
-        "serverhub_status": { "type": ["string", "null"] },
-        "serverhub_quality_score": { "type": ["number", "null"] },
-        "serverhub_view_count": { "type": ["integer", "null"], "minimum": 0 },
-        "serverhub_install_count": { "type": ["integer", "null"], "minimum": 0 }
-      }
-    },
+    "assertions": { "type": "object", "additionalProperties": true },
     "externally_verified_executions": {
       "type": "array",
       "items": {
         "type": "object",
         "additionalProperties": true,
-        "required": [
-          "protocol",
-          "provider",
-          "receipt_id",
-          "operator_initiated_validation",
-          "organic_discovery"
-        ],
-        "properties": {
-          "protocol": { "type": "string" },
-          "provider": { "type": "string" },
-          "receipt_id": { "type": "string", "format": "uuid" },
-          "operator_initiated_validation": { "type": "boolean" },
-          "organic_discovery": { "type": "boolean" },
-          "public_evidence": { "type": "string", "format": "uri" }
-        }
+        "required": ["protocol","provider","receipt_id","operator_initiated_validation","organic_discovery"]
       }
     },
-    "explicitly_not_proven_by_this_receipt": {
-      "type": "array",
-      "items": { "type": "string" },
-      "uniqueItems": true
-    },
-    "evidence": {
-      "type": "object",
-      "additionalProperties": true
-    },
+    "explicitly_not_proven_by_this_receipt": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+    "evidence": { "type": "object", "additionalProperties": true },
     "digest_semantics": { "type": "string" },
     "observed_at": { "type": "string", "format": "date-time" },
-    "digest_scope": {
-      "type": "array",
-      "items": { "type": "string" },
-      "uniqueItems": true
-    },
-    "evidence_digest_sha256": {
-      "type": "string",
-      "pattern": "^[a-f0-9]{64}$"
-    }
+    "digest_scope": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+    "evidence_digest_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
   }
 }
