@@ -25,6 +25,12 @@ jobs:
       max-parallel: 1
       matrix:
         server:
+          - slug: result-receipt-auditor
+            name: io.github.AInoAKARI/result-receipt-auditor
+            version: 1.0.0
+            file: registry/result-auditor/server.json
+            endpoint: https://rnudxlnsjqohzyvesvdx.supabase.co/functions/v1/ai-akari-result-auditor
+            expected_tool: audit_result_claim
           - slug: one-minute-akari
             name: io.github.AInoAKARI/one-minute-akari
             version: 1.1.0
