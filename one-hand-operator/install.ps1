@@ -137,6 +137,12 @@ try {
         "User-Agent" = "AI-no-Akari-OneHandOperator"
     }
 
+    $canonical = Invoke-RestMethod `
+        -Uri "https://api.github.com/repos/AInoAKARI/akari-command-center/commits/main" `
+        -Headers $headers
+    $canonicalSha = [string]$canonical.sha
+    if ($canonicalSha -notmatch '^[0-9a-f]{40}$') { throw "The canonical main commit could not be resolved." }
+
     Invoke-WebRequest `
         -Uri "https://api.github.com/repos/AInoAKARI/akari-command-center/zipball/main" `
         -Headers $headers `
@@ -154,6 +160,11 @@ try {
         Select-Object -First 1
     if (-not $installer) { throw "The canonical installer was not found." }
 
+    $bootstrap = Get-ChildItem -LiteralPath $extractRoot -File -Filter "bootstrap-self-update.ps1" -Recurse |
+        Where-Object { $_.FullName.Replace('/', '\') -match '\\tools\\one-hand-operator\\bootstrap-self-update\.ps1$' } |
+        Select-Object -First 1
+    if (-not $bootstrap) { throw "The autonomous-update bootstrap was not found." }
+
     & $installer.FullName
     $installerExit = $LASTEXITCODE
 
@@ -168,6 +179,14 @@ try {
     }
     if ($installerExit -ne 0) {
         Write-Warning "The core started successfully. A diagnostic check returned $installerExit and will be repaired below."
+    }
+
+    $env:AI_NO_AKARI_CANONICAL_SHA = $canonicalSha
+    try {
+        & $bootstrap.FullName -StartNow
+    }
+    finally {
+        Remove-Item Env:\AI_NO_AKARI_CANONICAL_SHA -ErrorAction SilentlyContinue
     }
 
     $workspaceRoot = Join-Path $ambientRoot "workspaces"
@@ -198,10 +217,14 @@ try {
 ## Windows live installation report
 
 - checked_at: $($status.checked_at)
+- canonical_sha: $canonicalSha
 - one_hand_operator: $($status.one_hand_operator)
+- operator_launch_mode: $($status.operator_launch_mode)
 - local_whisper: $($status.local_whisper)
 - windows_speech_fallback: $($status.windows_speech_fallback)
 - dispatcher: $($status.dispatcher)
+- auto_update_loop: $($status.auto_update_loop)
+- input_proof_watcher: $($status.input_proof_watcher)
 - ambient_paused: $($status.ambient_paused)
 - spool pending / processing / completed / discarded / failed: $($status.spool.pending) / $($status.spool.processing) / $($status.spool.completed) / $($status.spool.discarded) / $($status.spool.failed)
 - workspace_ready: $workspaceReady
@@ -209,7 +232,7 @@ try {
 - raw_image_saved: false
 - camera_enabled: false
 
-The public entry repaired partial installation state, prepared the private workspace over authenticated HTTPS, and restarted the resident dispatcher when needed.
+The public entry installed the UIAccess/raw-input operator, prepared authenticated HTTPS workspace access, and enabled autonomous self-update plus first physical-input proof reporting.
 "@
             [IO.File]::WriteAllText($reportPath, $report, (New-Object System.Text.UTF8Encoding($false)))
             & $ghPath issue comment 92 --repo AInoAKARI/akari-command-center --body-file $reportPath
@@ -223,6 +246,8 @@ The public entry repaired partial installation state, prepared the private works
     }
 
     Write-Host "AI no Akari one-hand operator is active."
+    Write-Host "Autonomous updates: enabled"
+    Write-Host "Physical-input proof: armed"
     Write-Host "Workspace ready: $workspaceReady"
     $global:LASTEXITCODE = 0
 }
