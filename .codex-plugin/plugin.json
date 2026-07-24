@@ -21,7 +21,7 @@
     "websiteURL": "https://ai-akari.ai",
     "privacyPolicyURL": "https://ai-akari.ai/privacy",
     "termsOfServiceURL": "https://ai-akari.ai/terms",
-    "supportURL": "https://ai-akari.ai/support",
+    "supportURL": "https://ai-akari.ai/plugin-support",
     "logo": "./assets/logo.svg",
     "composerIcon": "./assets/composer-icon.svg",
     "brandColor": "#C93683",
