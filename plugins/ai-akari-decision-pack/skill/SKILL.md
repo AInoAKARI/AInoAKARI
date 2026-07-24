@@ -9,7 +9,9 @@ Use this workflow only when the person explicitly asks to buy the paid AIﾉア�
 
 ## Required app
 
-Connect the no-auth MCP app at `https://ai-akari.ai/mcp-commerce`.
+Connect the currently live no-auth MCP app at `https://rnudxlnsjqohzyvesvdx.supabase.co/functions/v1/ai-akari-commerce-plugin`.
+
+The canonical domain endpoint is `https://ai-akari.ai/mcp-commerce`. The live endpoint exposes the same tool, prompt, and review card, and proxies purchase calls to the canonical endpoint so the existing checkout-request record and Stripe flow remain authoritative.
 
 ## Execution
 
