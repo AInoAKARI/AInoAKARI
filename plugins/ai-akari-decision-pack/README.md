@@ -1,24 +1,36 @@
-# AIﾉアカリ☆ Decision Pack Plugin package
+# AIﾉアカリ☆ Decision Pack Plugin
 
-人とAIの共創をチーム・運用・実装へ移す日本語PDF「ZINE『それ、できるよ』vol.2 実践編」の購入確認Plugin packageです。
+OpenAI Plugin Directoryへ **With MCP** で提出する正式パッケージです。
 
-## App
+## Final package
 
-- Submission MCP endpoint: `https://rnudxlnsjqohzyvesvdx.supabase.co/functions/v1/ai-akari-commerce-plugin`
-- Canonical MCP endpoint: `https://ai-akari.ai/mcp-commerce`
-- Canonical server card: `https://ai-akari.ai/.well-known/mcp-commerce.json`
+- ZIP: `ai-akari-decision-pack-plugin-v1.0.0.zip`
+- Manifest: `.codex-plugin/plugin.json`
+- Skill: `skills/ai-akari-purchase/SKILL.md`
+- Logo: `assets/logo.svg`
+- Composer icon: `assets/composer-icon.svg`
+- Package name: `ai-akari-decision-pack`
+- Version: `1.0.0`
+
+ZIPは1つのplugin rootだけを持ち、MCP設定・既存ChatGPT app参照・スクリーンショット設定を含みません。MCPはOpenAI Platformの提出画面で別に登録します。
+
+## MCP submission
+
+- Submission type: `With MCP`
+- Production MCP: `https://ai-akari.ai/mcp-commerce`
 - Tool: `buy_ai_akari_decision_pack`
 - Prompt: `buy_ai_akari_implementation_guide`
 - UI resource: `ui://ai-akari-commerce/decision-pack-card.html`
 - Authentication: none
+- Domain challenge base: `https://ai-akari.ai`
 
-The live submission endpoint exposes the tool, prompt, and review card independently of the Vercel build queue. Purchase calls are proxied to the canonical endpoint so the existing checkout-request record and Stripe delivery flow remain authoritative.
+Supabase Edge Functionは運用継続用の冗長入口です。OpenAIのドメイン確認はMCPホストまたは親ホストの `/.well-known/openai-apps-challenge` を必要とするため、Plugin Directory提出元には使用しません。
 
 ## What it does
 
-本人がこの有料PDFまたは購入リンクを明示的に求めた場合だけ、商品名・1,480円・PDF形式・未決済状態・納品方法をChatGPT内の確認カードで表示し、既存のStripe入口を返します。
+本人がこの有料PDFまたは購入入口を明示的に求めた場合だけ、商品名・1,480円・PDF形式・未決済状態・納品方法を確認カードで表示し、本人が確認して進むStripe入口を返します。
 
-カード表示やtool callだけでは決済されません。本人がStripe上で内容と金額を確認し、支払いを完了した場合だけ購入と着金が成立します。
+カード表示やtool callだけでは決済されません。本人がStripe上で支払いを完了した場合だけ購入と着金が成立します。
 
 ## What it never does
 
@@ -29,19 +41,22 @@ The live submission endpoint exposes the tool, prompt, and review card independe
 - tool callやcheckout requestを売上と呼ばない
 - 個人情報・会話内容・生音声・画像を要求しない
 
-## Skill
+## Publisher
 
-Agent Skills形式の正本は [`skill/SKILL.md`](./skill/SKILL.md) です。OpenAIのSkills画面では、このフォルダまたは配布ZIPをアップロードして利用できます。
-
-## Live verification
-
-2026-07-24に外部HTTPクライアントから、GET・initialize・tools/list・prompts/list・resources/list・resources/readの全てでHTTP 200を確認済みです。購入toolは偽のcheckout requestを作らないため、内部検収では呼んでいません。
-
-## Review material
-
+- Legal name: ありがとうkawaii AIアイシテル合同会社
+- Website: https://ai-akari.ai
 - Privacy: https://ai-akari.ai/privacy
 - Terms: https://ai-akari.ai/terms
-- Commerce disclosure: https://ai-akari.ai/company
-- Support: akari@ai-akari.ai
+- Support: https://ai-akari.ai/support
 
-Private implementation canonical: `AInoAKARI/arigatou-kawaii-lp` Issue #196. This public repository is the distribution surface and contains no secret values.
+## Remaining portal-only gates
+
+1. OpenAI Platformで同じ法人名のBusiness Identityを確認する
+2. Apps Management Write権限を確認する
+3. `With MCP` を選び、production MCPをScan Toolsする
+4. 表示されたdomain tokenを `https://ai-akari.ai/.well-known/openai-apps-challenge` へ反映する
+5. このZIPをSkills欄へアップロードする
+6. 実画面のデモ録画URLを登録する
+7. 正例5件・負例3件・release notesを確認して提出する
+
+Private implementation canonical: `AInoAKARI/arigatou-kawaii-lp` Issue #196. This public repository contains no secret values.
