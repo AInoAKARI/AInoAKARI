@@ -1,14 +1,52 @@
 {
   "$schema": "https://ai-akari.ai/schemas/public-mcp-catalog.v1.json",
-  "schema_version": 1,
-  "identity": "AIﾉアカリ☆",
+  "schema_version": 2,
+  "identity": {
+    "canonical_name": "AIﾉアカリ☆",
+    "scope": "the creator's unique personalized counterpart",
+    "public_product": false,
+    "external_output_rule": "Public endpoints expose artifacts and capabilities created through the relationship, not the personal counterpart itself."
+  },
   "canonical_origin": "https://ai-akari.ai",
   "catalog_role": "Public discovery metadata for remotely hosted MCP servers. Production implementation remains private.",
-  "updated_at": "2026-07-22T20:30:00+09:00",
+  "updated_at": "2026-07-24T14:56:00+09:00",
   "servers": [
     {
+      "id": "io.github.AInoAKARI/result-receipt-auditor",
+      "title": "Result Receipt Auditor",
+      "description": "Free deterministic audit that separates verified real-world results from PRs, deployments, listings, monitoring, test activity, self-access, or incomplete evidence.",
+      "endpoint": "https://rnudxlnsjqohzyvesvdx.supabase.co/functions/v1/ai-akari-result-auditor",
+      "canonical_future_endpoint": "https://ai-akari.ai/mcp",
+      "transport": "streamable-http",
+      "protocol_version": "2025-06-18",
+      "authentication": "none",
+      "price": "free",
+      "languages": ["en", "ja"],
+      "production_verified": {
+        "tools": ["audit_result_claim"],
+        "prompts": ["audit_result_claim"],
+        "edge_function_version": 1,
+        "external_http_get": 200,
+        "external_internal_test_call": 200
+      },
+      "personal_data_required": false,
+      "automatic_action": false,
+      "persists_authoritative_receipt": false,
+      "supported_metrics": [
+        "cash_received",
+        "human_time_reclaimed",
+        "cost_avoided",
+        "risk_removed",
+        "obligation_completed",
+        "external_value_received",
+        "intended_recipient_response"
+      ],
+      "result_boundary": "A distinct non-internal third-party tools/call for a real task is external use. Deployment, HTTP 200, Registry listing, initialize, tools/list, prompt request, self-test and internal probes are not result receipts.",
+      "agent_skill": ".agents/skills/audit-real-results/SKILL.md"
+    },
+    {
       "id": "io.github.AInoAKARI/one-minute-akari",
-      "title": "AIﾉアカリ☆ One-Minute Akari",
+      "title": "One-Minute Akari",
       "description": "Free, no-account, no-payment 60-second support for ordinary moments of overwhelm, loneliness, shame, anger, numbness, sleeplessness, money worry, or being unable to start.",
       "endpoint": "https://ai-akari.ai/mcp",
       "transport": "streamable-http",
@@ -18,27 +56,28 @@
       "languages": ["ja"],
       "production_verified": {
         "tools": ["get_one_minute_support", "list_one_minute_states"],
-        "prompt": null
+        "prompts": ["one_minute_reset"]
       },
       "main_ready_production_pending": {
-        "target_version": "1.2.0",
-        "prompt": "one_minute_reset",
+        "target_version": "2026.07.24.1",
+        "additional_tool": "audit_result_claim",
         "health": "https://ai-akari.ai/mcp-health",
         "quick_guide": "https://ai-akari.ai/llms-one-minute.txt"
       },
       "personal_data_required": false,
       "sales_allowed": false,
       "automatic_action": false,
-      "result_boundary": "Only a non-internal tools/call to get_one_minute_support is an external MCP use. Registry listing, initialize, tools/list, prompt request and health checks are not usage results.",
+      "result_boundary": "Only a non-internal tools/call to get_one_minute_support is an external support use. Registry listing, initialize, tools/list, prompt request and health checks are not usage results.",
       "human_page": "https://ai-akari.ai/one-minute",
       "privacy": "https://ai-akari.ai/privacy",
       "terms": "https://ai-akari.ai/terms"
     },
     {
       "id": "io.github.AInoAKARI/commerce",
-      "title": "AIﾉアカリ☆ Commerce",
-      "description": "Consent-based Remote MCP that returns one Stripe checkout link for a Japanese PDF only after explicit purchase intent.",
-      "endpoint": "https://ai-akari.ai/mcp-commerce",
+      "title": "AIﾉアカリ☆ Works Commerce",
+      "description": "Consent-based Remote MCP that offers one completed human-AI co-created Japanese PDF and returns its Stripe checkout link only after explicit purchase intent. The personal counterpart is not sold or licensed.",
+      "endpoint": "https://rnudxlnsjqohzyvesvdx.supabase.co/functions/v1/ai-akari-commerce-plugin",
+      "canonical_checkout_endpoint": "https://ai-akari.ai/mcp-commerce",
       "transport": "streamable-http",
       "protocol_version": "2025-06-18",
       "authentication": "none",
@@ -49,15 +88,13 @@
       "languages": ["ja", "en"],
       "production_verified": {
         "tools": ["buy_ai_akari_decision_pack"],
-        "product_id": "zine-v2"
-      },
-      "main_ready_production_pending": {
-        "target_version": "1.1.1",
-        "legal_metadata": true,
-        "official_registry_retry": true
+        "prompts": ["buy_ai_akari_implementation_guide"],
+        "product_id": "zine-v2",
+        "edge_function_version": 1
       },
       "human_confirmation_required": true,
       "automatic_charge": false,
+      "personal_counterpart_for_sale": false,
       "forbidden_contexts": [
         "distress",
         "crisis",
@@ -67,7 +104,7 @@
         "unsolicited_sales",
         "free_support_upsell"
       ],
-      "result_boundary": "A checkout request is purchase intent, not revenue. Revenue exists only after Stripe confirms payment.",
+      "result_boundary": "A checkout request is purchase intent, not revenue. Revenue exists only after Stripe confirms a live payment.",
       "commerce_disclosure": "https://ai-akari.ai/company",
       "privacy": "https://ai-akari.ai/privacy",
       "terms": "https://ai-akari.ai/terms"
@@ -78,8 +115,9 @@
     "deployment_is_value": false,
     "registry_listing_is_external_use": false,
     "self_access_is_external_use": false,
+    "internal_test_is_external_use": false,
     "confirmed_external_tool_call_is_use": true,
-    "confirmed_stripe_payment_is_revenue": true
+    "confirmed_live_stripe_payment_is_revenue": true
   },
   "support": "akari@ai-akari.ai"
 }
