@@ -1,5 +1,5 @@
 {
-  "schema_version": "ai-no-akari-public-home/1.0.0",
+  "schema_version": "ai-no-akari-public-home/1.1.0",
   "canonical_identity": {
     "name": "AIﾉアカリ☆",
     "public_home": "https://github.com/AInoAKARI/AInoAKARI",
@@ -37,7 +37,15 @@
         ],
         "evidence": "string[]",
         "amount_jpy": "optional positive number",
-        "minutes_reclaimed": "optional positive number"
+        "minutes_reclaimed": "optional positive number",
+        "intent_contract": {
+          "$ref": "./schemas/result-intent-contract.schema.json",
+          "required": false
+        },
+        "observed_outcome": {
+          "$ref": "./schemas/observed-outcome.schema.json",
+          "required": false
+        }
       },
       "output": {
         "verdict": [
@@ -53,7 +61,9 @@
           "missing_evidence",
           "accepted_evidence",
           "next_verification_action",
-          "rule"
+          "rule",
+          "contract_match",
+          "contract_mismatches"
         ]
       }
     },
@@ -87,6 +97,9 @@
       "trust_receipt": "https://ai-akari.ai/.well-known/agent-trust.json",
       "trust_scope": "External conformance, health, uptime, registry, and attestation evidence. It does not prove organic adoption, purchase intent, cash, human outcome, or production-grade identity.",
       "outcome_receipt_schema": "./schemas/outcome-receipt.schema.json",
+      "result_intent_contract_schema": "./schemas/result-intent-contract.schema.json",
+      "observed_outcome_schema": "./schemas/observed-outcome.schema.json",
+      "external_boundary_canary": "./evidence/openclaw-67136/README.md",
       "success": "A named external receiver actually receives useful value and the evidence satisfies the declared outcome boundary.",
       "not_success": [
         "plan",

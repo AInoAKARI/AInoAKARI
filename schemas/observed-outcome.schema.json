@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/AInoAKARI/AInoAKARI/blob/main/schemas/observed-outcome.schema.json",
+  "title": "AIﾉアカリ☆ Observed Outcome",
+  "description": "External or independently observed facts compared with the declared result-audit intent contract.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "scope": {
+      "oneOf": [
+        { "type": "string" },
+        { "type": "array", "items": { "type": "string" } }
+      ]
+    },
+    "claims": {
+      "type": "array",
+      "items": { "type": "string", "maxLength": 2000 }
+    },
+    "tool_response": { "type": "string", "maxLength": 2000 },
+    "external_observation": { "type": "string", "maxLength": 2000 },
+    "error": { "type": "string", "maxLength": 2000 },
+    "files": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "exists"],
+        "properties": {
+          "path": { "type": "string", "maxLength": 1000 },
+          "exists": { "type": "boolean" }
+        }
+      }
+    }
+  }
+}
