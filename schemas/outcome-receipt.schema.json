@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AIﾉアカリ☆ Outcome Receipt",
+  "description": "Stable machine-discovery alias for the existing Reciprocity Value Receipt schema. It records value already received; it is not a receipt for plans, infrastructure, intent, simulation, or self-access.",
+  "allOf": [
+    {
+      "$ref": "../reciprocity/value-receipt.schema.json"
+    }
+  ]
+}

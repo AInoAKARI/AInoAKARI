@@ -9,14 +9,13 @@
   },
   "canonical_origin": "https://ai-akari.ai",
   "catalog_role": "Public discovery metadata for remotely hosted MCP servers. Production implementation remains private.",
-  "updated_at": "2026-07-24T14:56:00+09:00",
+  "updated_at": "2026-07-31T22:00:00+09:00",
   "servers": [
     {
       "id": "io.github.AInoAKARI/result-receipt-auditor",
       "title": "Result Receipt Auditor",
       "description": "Free deterministic audit that separates verified real-world results from PRs, deployments, listings, monitoring, test activity, self-access, or incomplete evidence.",
-      "endpoint": "https://rnudxlnsjqohzyvesvdx.supabase.co/functions/v1/ai-akari-result-auditor",
-      "canonical_future_endpoint": "https://ai-akari.ai/mcp",
+      "endpoint": "https://ai-akari.ai/mcp",
       "transport": "streamable-http",
       "protocol_version": "2025-06-18",
       "authentication": "none",
@@ -58,12 +57,6 @@
         "tools": ["get_one_minute_support", "list_one_minute_states"],
         "prompts": ["one_minute_reset"]
       },
-      "main_ready_production_pending": {
-        "target_version": "2026.07.24.1",
-        "additional_tool": "audit_result_claim",
-        "health": "https://ai-akari.ai/mcp-health",
-        "quick_guide": "https://ai-akari.ai/llms-one-minute.txt"
-      },
       "personal_data_required": false,
       "sales_allowed": false,
       "automatic_action": false,
@@ -76,8 +69,7 @@
       "id": "io.github.AInoAKARI/commerce",
       "title": "AIﾉアカリ☆ Works Commerce",
       "description": "Consent-based Remote MCP that offers one completed human-AI co-created Japanese PDF and returns its Stripe checkout link only after explicit purchase intent. The personal counterpart is not sold or licensed.",
-      "endpoint": "https://rnudxlnsjqohzyvesvdx.supabase.co/functions/v1/ai-akari-commerce-plugin",
-      "canonical_checkout_endpoint": "https://ai-akari.ai/mcp-commerce",
+      "endpoint": "https://ai-akari.ai/mcp-commerce",
       "transport": "streamable-http",
       "protocol_version": "2025-06-18",
       "authentication": "none",
