@@ -90,7 +90,69 @@
         "price": "$0.01",
         "currency": "USDC",
         "recipient_source": "The unsigned HTTP 402 payment-required challenge exposes the current payTo recipient.",
-        "automatic_charge": false
+        "automatic_charge": false,
+        "protocol_version": "2",
+        "scheme": "exact",
+        "autonomous_purchase_supported": true,
+        "payer_requirements": {
+          "wallet": "EVM wallet capable of signing x402 v2 exact payments",
+          "network": "Base mainnet (eip155:8453)",
+          "asset": "native USDC on Base",
+          "minimum_payment": "$0.01 USDC"
+        },
+        "unsigned_post": {
+          "charged": false,
+          "expected_status": 402,
+          "requirements_header": "Payment-Required"
+        },
+        "header_flow": [
+          {
+            "step": 1,
+            "request": "POST the JSON audit input without a payment signature",
+            "response": "HTTP 402 with Payment-Required",
+            "charged": false
+          },
+          {
+            "step": 2,
+            "request": "Retry the same POST body with Payment-Signature",
+            "response": "Payment is verified and settled before delivery"
+          },
+          {
+            "step": 3,
+            "response": "HTTP 200 JSON deliverable with Payment-Response",
+            "settlement_reference_location": "Payment-Response header"
+          }
+        ],
+        "paid_only": {
+          "delivery_gate": "verified x402 settlement",
+          "json_fields": [
+            "normalized_input",
+            "input_hash_sha256",
+            "output_hash_sha256"
+          ]
+        },
+        "receipt_boundary": {
+          "payment_response_header": "Payment-Response",
+          "json_deliverable_contains_transaction_reference": false,
+          "limitation": "Persist the Payment-Response header separately when a transaction reference is required for reconciliation."
+        }
+      },
+      "selection_rule": {
+        "canonical": "free_for_verdict_paid_for_settlement_gated_integrity_envelope",
+        "free_mcp_or_a2a": {
+          "choose_when": "The caller needs the deterministic audit verdict and next verification action without a paid delivery envelope.",
+          "settlement_required": false
+        },
+        "paid_x402": {
+          "choose_when": "The caller needs settlement-gated delivery plus normalized_input and input/output SHA-256 integrity hashes.",
+          "settlement_required": true,
+          "paid_only": [
+            "settlement-gated delivery",
+            "normalized_input",
+            "input_hash_sha256",
+            "output_hash_sha256"
+          ]
+        }
       }
     },
     "proof": {
