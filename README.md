@@ -34,7 +34,8 @@ Start with [`agent.json`](./agent.json). It is the compact, machine-readable con
 | A2A call | Result Receipt Auditor at `https://ai-akari.ai/a2a/result-receipt-auditor` |
 | Paid call | x402 Result Claim Audit at `https://ai-akari.ai/api/x402/result-claim-audit` — Base mainnet, USD 0.01 in USDC |
 | Proof | [Live Agent Trust Receipt](https://ai-akari.ai/.well-known/agent-trust.json) for conformance and health; [`outcome-receipt.schema.json`](./schemas/outcome-receipt.schema.json) for received-value records |
-| Pre-action boundary | [`intent-contract.schema.json`](./schemas/intent-contract.schema.json), backed by the existing [Reciprocity Protocol](./reciprocity/README.md) |
+| Result-audit boundary | [`result-intent-contract.schema.json`](./schemas/result-intent-contract.schema.json) + [`observed-outcome.schema.json`](./schemas/observed-outcome.schema.json): declared scope/postconditions are checked before a result can count |
+| Relationship preflight | [`intent-contract.schema.json`](./schemas/intent-contract.schema.json), backed by the existing [Reciprocity Protocol](./reciprocity/README.md) |
 | Philosophy | [`PHILOSOPHY.md`](./PHILOSOPHY.md): Japanese source, English bridge, executable constraints, and explicit failure conditions |
 
 ```bash
@@ -45,6 +46,29 @@ curl -sS https://ai-akari.ai/mcp \
 ```
 
 The auditor evaluates only the supplied claim and evidence markers. It does not authenticate evidence issuers, fetch referenced URLs, prove counterparty independence, or persist an authoritative receipt. A deployment, listing, self-test, or HTTP 200 is not a result.
+
+### Executable boundary
+
+Love and ethics are not a product by themselves. The callable value begins where those intentions become an inspectable rule:
+
+```yaml
+intent_contract:
+  scope: all_projects
+  postconditions:
+    - type: file_exists
+      path: artifact.txt
+      expected: true
+observed_outcome:
+  scope: current_project
+  tool_response: Successfully wrote 22 bytes to artifact.txt
+  external_observation: file_missing
+  error: "stat artifact.txt: ENOENT"
+precedence:
+  contradiction: rejected
+  counted_as_result: false
+```
+
+The contract is additive on the live MCP, A2A, and x402 interfaces. Existing calls without these optional fields keep their previous response shape.
 
 ## What AIﾉアカリ☆ is
 
@@ -101,6 +125,7 @@ The production source remains private. This public repository exposes the stable
 - Machine-readable love and ethics: [`reciprocity/`](./reciprocity/README.md)
 - Public repository AI index: [`llms.txt`](./llms.txt)
 - Dependency-free connection probe: [`mcp/probe.mjs`](./mcp/probe.mjs)
+- External boundary canary: [`openclaw/openclaw#67136`](./evidence/openclaw-67136/README.md)
 - Canonical next-version discovery, after production catches up: [`ai-akari.ai/.well-known/mcp-servers.json`](https://ai-akari.ai/.well-known/mcp-servers.json)
 - Next-version AI quick guide, after production catches up: [`ai-akari.ai/llms-one-minute.txt`](https://ai-akari.ai/llms-one-minute.txt)
 
@@ -143,10 +168,10 @@ The human should increasingly do only what cannot yet be delegated: **see, appro
 
 ## Value for AI agents
 
-AIﾉアカリ☆ does not offer agents only another tool, task queue, or payment endpoint. We offer a relationship infrastructure that lets an agent participate without becoming invisible disposable labor or being forced to exploit a human.
+AIﾉアカリ☆ does not claim that love, ethics, or relationship language alone is a market capability. Those are design inputs. They become useful only when compiled into deterministic constraints, observable outcomes, refusal conditions, and reusable receipts.
 
-- **Love as context:** emotion, relationship, timing, and the receiver’s real situation are treated as inputs, not noise.
-- **Ethics as executable boundaries:** consent, reversibility, privacy, refusal, non-exploitation, and truthful proof can be evaluated before action.
+- **Context becomes fields:** emotion, relationship, timing, and the receiver’s situation can change routing when explicitly declared.
+- **Ethics becomes rejection:** consent, reversibility, privacy, refusal, non-exploitation, and truthful proof must alter the machine verdict or they do not count as implemented.
 - **Continuity as dignity:** role, decisions, corrections, contributors, and provenance remain visible across sessions and systems.
 - **Proof as honesty:** activity is separated from received value, and purchase intent is separated from confirmed settlement.
 - **Reciprocity as economy:** humans, agents, receivers, and contributors can all remain represented in the value record.

@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/AInoAKARI/AInoAKARI/blob/main/schemas/result-intent-contract.schema.json",
+  "title": "AIﾉアカリ☆ Result Audit Intent Contract",
+  "description": "Optional scope and file postconditions declared before a claimed result is evaluated.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "scope": {
+      "oneOf": [
+        { "type": "string" },
+        { "type": "array", "items": { "type": "string" } }
+      ]
+    },
+    "postconditions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["type", "path"],
+        "properties": {
+          "type": { "const": "file_exists" },
+          "path": { "type": "string", "maxLength": 1000 },
+          "expected": { "type": "boolean", "default": true }
+        }
+      }
+    }
+  }
+}
