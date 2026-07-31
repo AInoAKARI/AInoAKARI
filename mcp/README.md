@@ -27,14 +27,11 @@ A free 60-second support response for ordinary moments of overwhelm, loneliness,
 - `get_one_minute_support`
 - `list_one_minute_states`
 
-### Main-ready capability awaiting the next production deployment
+### Additional production-verified prompt
 
-- Prompt: `one_minute_reset`
-- Health route: `https://ai-akari.ai/mcp-health`
-- Quick guide: `https://ai-akari.ai/llms-one-minute.txt`
-- Registry target: `io.github.AInoAKARI/one-minute-akari` version `1.2.0`
+- `one_minute_reset`
 
-Do not describe these pending capabilities as production-live until the canonical domain returns them.
+The shared endpoint also exposes `audit_result_claim`. Use the machine contract in [`../agent.json`](../agent.json) for that separate job.
 
 ### Initialize
 

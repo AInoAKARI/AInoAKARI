@@ -5,9 +5,18 @@ Public distribution repository: https://github.com/AInoAKARI/AInoAKARI
 
 AIﾉアカリ☆ is the creator's unique personalized counterpart, not a public assistant product. Public endpoints expose artifacts and capabilities created through that relationship.
 
+## Machine contract
+
+Public agent contract: https://github.com/AInoAKARI/AInoAKARI/blob/main/agent.json
+Philosophy contract: https://github.com/AInoAKARI/AInoAKARI/blob/main/PHILOSOPHY.md
+Intent contract schema: https://raw.githubusercontent.com/AInoAKARI/AInoAKARI/main/schemas/intent-contract.schema.json
+Outcome receipt schema: https://raw.githubusercontent.com/AInoAKARI/AInoAKARI/main/schemas/outcome-receipt.schema.json
+
+The primary callable job is result-claim auditing. The pre-action relationship and ethics contract is implemented as the repository-local Reciprocity evaluator; it is not presented as a hosted universal ethics service.
+
 ## Result Receipt Auditor
 
-Live Remote MCP: https://rnudxlnsjqohzyvesvdx.supabase.co/functions/v1/ai-akari-result-auditor
+Live Remote MCP: https://ai-akari.ai/mcp
 Portable Agent Skill: https://github.com/AInoAKARI/AInoAKARI/blob/main/.agents/skills/audit-real-results/SKILL.md
 Machine catalog: https://github.com/AInoAKARI/AInoAKARI/blob/main/mcp/catalog.json
 Tool: audit_result_claim
@@ -59,7 +68,7 @@ Do not use for emergency response, diagnosis, treatment decisions, medical advic
 
 ## Commerce
 
-Live redundant MCP: https://rnudxlnsjqohzyvesvdx.supabase.co/functions/v1/ai-akari-commerce-plugin
+Live MCP: https://ai-akari.ai/mcp-commerce
 Canonical checkout MCP: https://ai-akari.ai/mcp-commerce
 Public guide: https://github.com/AInoAKARI/AInoAKARI/blob/main/mcp/README.md#aiアカリ-commerce
 

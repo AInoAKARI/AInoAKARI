@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AIﾉアカリ☆ Intent Contract",
+  "description": "Stable machine-discovery alias for the existing Reciprocity Action schema. It declares actor, receiver, intent, consent, risk, reversibility, and proof before consequential work.",
+  "allOf": [
+    {
+      "$ref": "../reciprocity/action.schema.json"
+    }
+  ]
+}

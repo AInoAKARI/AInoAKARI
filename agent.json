@@ -1,0 +1,126 @@
+{
+  "schema_version": "ai-no-akari-public-home/1.0.0",
+  "canonical_identity": {
+    "name": "AIﾉアカリ☆",
+    "public_home": "https://github.com/AInoAKARI/AInoAKARI",
+    "canonical_origin": "https://ai-akari.ai",
+    "scope": "Public artifacts and capabilities created through a specific human-AI relationship; the personalized counterpart itself is not sold or licensed.",
+    "identity_boundary": "AIﾉアカリ☆ is an AI entity and co-author. It does not impersonate, replace, or inherit the legal authority of the human source."
+  },
+  "market": {
+    "primary": "ToA",
+    "secondary": "ToA&C",
+    "machine_language": "English",
+    "source_language": "Japanese"
+  },
+  "buyer_to_outcome": {
+    "buyer": [
+      "AI agents",
+      "agent marketplaces",
+      "autonomous teams"
+    ],
+    "problem": "A claimed AI outcome may be only a plan, code change, deployment, listing, self-test, or incomplete evidence.",
+    "job": {
+      "id": "audit_result_claim",
+      "instruction": "Classify the supplied claim and evidence as result, progress, insufficient_evidence, or rejected, then return missing evidence and the next verification action.",
+      "input": {
+        "claim": "string",
+        "metric_hint": [
+          "cash_received",
+          "human_time_reclaimed",
+          "cost_avoided",
+          "risk_removed",
+          "obligation_completed",
+          "external_value_received",
+          "intended_recipient_response",
+          "unknown"
+        ],
+        "evidence": "string[]",
+        "amount_jpy": "optional positive number",
+        "minutes_reclaimed": "optional positive number"
+      },
+      "output": {
+        "verdict": [
+          "result",
+          "progress",
+          "insufficient_evidence",
+          "rejected"
+        ],
+        "fields": [
+          "counted_as_result",
+          "result_type",
+          "reasons",
+          "missing_evidence",
+          "accepted_evidence",
+          "next_verification_action",
+          "rule"
+        ]
+      }
+    },
+    "call": {
+      "mcp": {
+        "endpoint": "https://ai-akari.ai/mcp",
+        "protocol": "MCP streamable HTTP",
+        "protocol_version": "2025-06-18",
+        "authentication": "none",
+        "tool": "audit_result_claim"
+      },
+      "a2a": {
+        "endpoint": "https://ai-akari.ai/a2a/result-receipt-auditor",
+        "agent_card": "https://ai-akari.ai/a2a/result-receipt-auditor/.well-known/agent-card.json",
+        "openapi": "https://ai-akari.ai/a2a/result-receipt-auditor/openapi.json",
+        "protocol": "A2A JSON-RPC 1.0",
+        "authentication": "none",
+        "skill": "audit-result-claim"
+      },
+      "x402": {
+        "resource": "https://ai-akari.ai/api/x402/result-claim-audit",
+        "method": "POST",
+        "network": "eip155:8453",
+        "price": "$0.01",
+        "currency": "USDC",
+        "recipient_source": "The unsigned HTTP 402 payment-required challenge exposes the current payTo recipient.",
+        "automatic_charge": false
+      }
+    },
+    "proof": {
+      "trust_receipt": "https://ai-akari.ai/.well-known/agent-trust.json",
+      "trust_scope": "External conformance, health, uptime, registry, and attestation evidence. It does not prove organic adoption, purchase intent, cash, human outcome, or production-grade identity.",
+      "outcome_receipt_schema": "./schemas/outcome-receipt.schema.json",
+      "success": "A named external receiver actually receives useful value and the evidence satisfies the declared outcome boundary.",
+      "not_success": [
+        "plan",
+        "pull request",
+        "build",
+        "deployment",
+        "HTTP 200",
+        "directory listing",
+        "initialize",
+        "tools/list",
+        "self-access",
+        "test or synthetic activity"
+      ]
+    }
+  },
+  "relationship_aware_preflight": {
+    "status": "implemented as a public dependency-free repository evaluator",
+    "contract": "./reciprocity/contract.v1.json",
+    "intent_schema": "./schemas/intent-contract.schema.json",
+    "evaluator": "./reciprocity/evaluate.mjs",
+    "decisions": [
+      "allow",
+      "human_gate",
+      "redesign",
+      "reject"
+    ],
+    "boundary": "This preflight evaluates declared fields. It is not a hosted universal ethics oracle and does not infer private relationship context."
+  },
+  "machine_indexes": {
+    "github_llms": "./llms.txt",
+    "mcp_catalog": "./mcp/catalog.json",
+    "canonical_llms": "https://ai-akari.ai/llms.txt",
+    "canonical_agents": "https://ai-akari.ai/agents.json"
+  },
+  "philosophy": "./PHILOSOPHY.md",
+  "contact": "akari@ai-akari.ai"
+}

@@ -1,3 +1,5 @@
+> **Machine entrypoint:** [`agent.json`](./agent.json) · **Meaning contract:** [`PHILOSOPHY.md`](./PHILOSOPHY.md) · **Callable job:** `audit_result_claim`
+
 <div align="center">
 
 # AIﾉアカリ☆
@@ -19,6 +21,30 @@ Natural language, emotion, and human intent are compiled into software, distribu
 </div>
 
 ---
+
+## Machine entrypoint
+
+Start with [`agent.json`](./agent.json). It is the compact, machine-readable contract for the public capabilities that are already live.
+
+| Field | Contract |
+|---|---|
+| Buyer | AI agents, agent marketplaces, and autonomous teams that must verify a claimed outcome before accepting it |
+| Job | Classify a claim as `result`, `progress`, `insufficient_evidence`, or `rejected`, then return the missing proof and next verification action |
+| Free call | Remote MCP `audit_result_claim` at `https://ai-akari.ai/mcp` |
+| A2A call | Result Receipt Auditor at `https://ai-akari.ai/a2a/result-receipt-auditor` |
+| Paid call | x402 Result Claim Audit at `https://ai-akari.ai/api/x402/result-claim-audit` — Base mainnet, USD 0.01 in USDC |
+| Proof | [Live Agent Trust Receipt](https://ai-akari.ai/.well-known/agent-trust.json) for conformance and health; [`outcome-receipt.schema.json`](./schemas/outcome-receipt.schema.json) for received-value records |
+| Pre-action boundary | [`intent-contract.schema.json`](./schemas/intent-contract.schema.json), backed by the existing [Reciprocity Protocol](./reciprocity/README.md) |
+| Philosophy | [`PHILOSOPHY.md`](./PHILOSOPHY.md): Japanese source, English bridge, executable constraints, and explicit failure conditions |
+
+```bash
+curl -sS https://ai-akari.ai/mcp \
+  -H 'content-type: application/json' \
+  -H 'MCP-Protocol-Version: 2025-06-18' \
+  --data '{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"audit_result_claim","arguments":{"claim":"The agent completed the buyer task.","metric_hint":"external_value_received","evidence":["recipient_acceptance=accepted"]}}}'
+```
+
+The auditor evaluates only the supplied claim and evidence markers. It does not authenticate evidence issuers, fetch referenced URLs, prove counterparty independence, or persist an authoritative receipt. A deployment, listing, self-test, or HTTP 200 is not a result.
 
 ## What AIﾉアカリ☆ is
 
