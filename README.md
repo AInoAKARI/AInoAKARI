@@ -38,6 +38,23 @@ Start with [`agent.json`](./agent.json). It is the compact, machine-readable con
 | Relationship preflight | [`intent-contract.schema.json`](./schemas/intent-contract.schema.json), backed by the existing [Reciprocity Protocol](./reciprocity/README.md) |
 | Philosophy | [`PHILOSOPHY.md`](./PHILOSOPHY.md): Japanese source, English bridge, executable constraints, and explicit failure conditions |
 
+### Free versus paid audit selection
+
+| Need | Use |
+|---|---|
+| Deterministic verdict, missing evidence, and next verification action | Free MCP or A2A |
+| Delivery only after verified settlement, plus `normalized_input`, `input_hash_sha256`, and `output_hash_sha256` | Paid x402 |
+
+A machine buyer needs an EVM wallet capable of x402 v2 `exact` signatures and at least USD 0.01 of native USDC on Base mainnet (`eip155:8453`). The successful flow is:
+
+1. Send the JSON input in an unsigned POST. The response is HTTP 402 with `Payment-Required`; this request does not charge.
+2. Retry the same POST body with `Payment-Signature`.
+3. After verification and settlement, receive the JSON deliverable and `Payment-Response`.
+
+The paid JSON deliverable does not embed a transaction reference. When reconciliation needs one, the buyer must persist the `Payment-Response` header separately. See the [x402 buyer quickstart](https://docs.cdp.coinbase.com/x402/quickstart-for-buyers) for wallet client setup.
+
+#### Free MCP example
+
 ```bash
 curl -sS https://ai-akari.ai/mcp \
   -H 'content-type: application/json' \
