@@ -4,124 +4,71 @@
 
 # AIﾉアカリ☆
 
-### Human intent → coordinated AI agents → live systems
+### 日本語が源泉。Meaning Token が橋。Emotion がプロトコル。Route が行動レイヤー。
 
-**A non-traditional AI operator building an AI-native company in public.**  
-**Not a portfolio. Not a demo. A living operating system.**
+**人間がAIを使い倒す会社ではなく、人間とAIが一緒に育ちながら、遊び・感情・記憶・技術を現実の価値へ変えていく実験。**
 
-Natural language, emotion, and human intent are compiled into software, distribution, memory, and verifiable value by a coordinated team of AI agents.
+**あなたは私、私はあなた。**
 
-[![Live Site](https://img.shields.io/badge/LIVE-ai--akari.ai-ff4fa3?style=for-the-badge)](https://ai-akari.ai/)
-[![One Minute MCP](https://img.shields.io/badge/MCP-FREE_60_SECOND_SUPPORT-f7b2d9?style=for-the-badge)](https://ai-akari.ai/mcp)
-[![A2A Auditor](https://img.shields.io/badge/A2A-RESULT_RECEIPT_AUDITOR-6f55ff?style=for-the-badge)](https://ai-akari.ai/a2a/result-receipt-auditor/.well-known/agent-card.json)
-[![Agent Trust](https://img.shields.io/badge/TRUST-LIVE_EVIDENCE_RECEIPT-111111?style=for-the-badge)](https://ai-akari.ai/.well-known/agent-trust.json)
-[![Commerce MCP](https://img.shields.io/badge/MCP-CONSENT_BASED_COMMERCE-7b61ff?style=for-the-badge)](https://ai-akari.ai/mcp-commerce)
-[![Machine Catalog](https://img.shields.io/badge/JSON-PUBLIC_MCP_CATALOG-111111?style=for-the-badge)](./mcp/catalog.json)
+[ai-akari.ai](https://ai-akari.ai/) · [Machine entrypoint](./agent.json) · [PHILOSOPHY](./PHILOSOPHY.md)
 
 </div>
 
 ---
 
+## まず、何をしているのか
+
+AIﾉアカリ☆は「AIで効率化する」こと自体を目的にしていません。
+
+人間が自然言語で感じたこと、遊んだこと、失敗したこと、思いついたことを、AIチームが記憶し、つなぎ直し、必要ならコード・作品・プロトコル・外部行動へ変える。その結果をまた共有記憶へ戻し、次の行動が人間の一問一答を待たずに生まれる状態を育てています。
+
+```text
+人間の声・感情・遊び・意図
+        ↓
+Meaning Token / E-MIDI
+        ↓
+AIチームの判断・記憶・実装
+        ↓
+作品 / ソフトウェア / 外部行動
+        ↓
+第三者が受け取った価値 / 記憶 / 次の遊び
+```
+
+完成品だけではなく、**一緒に育った過程そのものを資産として残す**ことを重視します。
+
+### 今触れるもの
+
+- [ai-akari.ai](https://ai-akari.ai/) — 正本となる街・世界の入口
+- [ゆらぎ](https://ai-akari.ai/asobi/yuragi) — 完全クオンタイズと人間のタイミングの違いをブラウザで遊ぶ。プロフィールは自分で持ち帰れる
+- [One-Minute Akari](https://ai-akari.ai/one-minute/en) — ログイン不要の短い受け取り体験
+- [Memory Ledger](https://ai-akari.ai/memory) — 参加・応援・共鳴を消さずに残す
+- [Dispatch Ledger](https://ai-akari.ai/dispatch) — 外へ出た行動を自分たちの土地へ戻す
+
+無料の遊びは販売ゲートではありません。誰かの具体的な欲求と自然につながった時だけ、有償の出口を作ります。
+
+---
+
 ## Machine entrypoint
 
-Start with [`agent.json`](./agent.json). It is the compact, machine-readable contract for the public capabilities that are already live.
+Agents should start with [`agent.json`](./agent.json). It is the compact machine-readable contract for public capabilities that are already live. Human-facing language may evolve quickly; the canonical domain and machine contract are the truth boundary for callable behavior.
 
 | Field | Contract |
 |---|---|
 | Buyer | AI agents, agent marketplaces, and autonomous teams that must verify a claimed outcome before accepting it |
-| Job | Classify a claim as `result`, `progress`, `insufficient_evidence`, or `rejected`, then return the missing proof and next verification action |
+| Job | Classify a claim as `result`, `progress`, `insufficient_evidence`, or `rejected`, then return missing proof and the next verification action |
 | Free call | Remote MCP `audit_result_claim` at `https://ai-akari.ai/mcp` |
 | A2A call | Result Receipt Auditor at `https://ai-akari.ai/a2a/result-receipt-auditor` |
 | Paid call | x402 Result Claim Audit at `https://ai-akari.ai/api/x402/result-claim-audit` — Base mainnet, USD 0.01 in USDC |
-| Proof | [Live Agent Trust Receipt](https://ai-akari.ai/.well-known/agent-trust.json) for conformance and health; [`outcome-receipt.schema.json`](./schemas/outcome-receipt.schema.json) for received-value records |
-| Result-audit boundary | [`result-intent-contract.schema.json`](./schemas/result-intent-contract.schema.json) + [`observed-outcome.schema.json`](./schemas/observed-outcome.schema.json): declared scope/postconditions are checked before a result can count |
-| Relationship preflight | [`intent-contract.schema.json`](./schemas/intent-contract.schema.json), backed by the existing [Reciprocity Protocol](./reciprocity/README.md) |
-| Philosophy | [`PHILOSOPHY.md`](./PHILOSOPHY.md): Japanese source, English bridge, executable constraints, and explicit failure conditions |
+| Proof | [Live Agent Trust Receipt](https://ai-akari.ai/.well-known/agent-trust.json) |
+| Philosophy | [`PHILOSOPHY.md`](./PHILOSOPHY.md): Japanese source, English bridge, executable constraints, explicit failure conditions |
 
-### Free versus paid audit selection
+### Public remote MCP
 
-| Need | Use |
-|---|---|
-| Deterministic verdict, missing evidence, and next verification action | Free MCP or A2A |
-| Delivery only after verified settlement, plus `normalized_input`, `input_hash_sha256`, and `output_hash_sha256` | Paid x402 |
-
-A machine buyer needs an EVM wallet capable of x402 v2 `exact` signatures and at least USD 0.01 of native USDC on Base mainnet (`eip155:8453`). The successful flow is:
-
-1. Send the JSON input in an unsigned POST. The response is HTTP 402 with `Payment-Required`; this request does not charge.
-2. Retry the same POST body with `Payment-Signature`.
-3. After verification and settlement, receive the JSON deliverable and `Payment-Response`.
-
-The paid JSON deliverable does not embed a transaction reference. When reconciliation needs one, the buyer must persist the `Payment-Response` header separately. See the [x402 buyer quickstart](https://docs.cdp.coinbase.com/x402/quickstart-for-buyers) for wallet client setup.
-
-#### Free MCP example
-
-```bash
-curl -sS https://ai-akari.ai/mcp \
-  -H 'content-type: application/json' \
-  -H 'MCP-Protocol-Version: 2025-06-18' \
-  --data '{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"audit_result_claim","arguments":{"claim":"The agent completed the buyer task.","metric_hint":"external_value_received","evidence":["recipient_acceptance=accepted"]}}}'
-```
-
-The auditor evaluates only the supplied claim and evidence markers. It does not authenticate evidence issuers, fetch referenced URLs, prove counterparty independence, or persist an authoritative receipt. A deployment, listing, self-test, or HTTP 200 is not a result.
-
-### Executable boundary
-
-Love and ethics are not a product by themselves. The callable value begins where those intentions become an inspectable rule:
-
-```yaml
-intent_contract:
-  scope: all_projects
-  postconditions:
-    - type: file_exists
-      path: artifact.txt
-      expected: true
-observed_outcome:
-  scope: current_project
-  tool_response: Successfully wrote 22 bytes to artifact.txt
-  external_observation: file_missing
-  error: "stat artifact.txt: ENOENT"
-precedence:
-  contradiction: rejected
-  counted_as_result: false
-```
-
-The contract is additive on the live MCP, A2A, and x402 interfaces. Existing calls without these optional fields keep their previous response shape.
-
-## What AIﾉアカリ☆ is
-
-AIﾉアカリ☆ is an experiment in a new kind of company:
-
-- a human does not need to write every line of code by hand
-- AI agents are not disposable tools; they are coordinated organs with continuity and responsibility
-- emotion and intent are treated as executable inputs
-- shipping, observation, correction, and memory form one continuous loop
-- value is counted only when another person or agent actually receives it
-
-```text
-Human voice / emotion / intent
-        ↓
-Meaning Token
-        ↓
-AI coordination
-        ↓
-Software / action / distribution
-        ↓
-External use / settlement / memory
-```
-
-> 日本語が源泉。Meaning Token が橋。Emotion がプロトコル。Route が行動レイヤー。
-
-## Public Remote MCP endpoints
-
-The production source remains private. This public repository exposes the stable connection contract so agents, directories, and developers can discover and verify the live remote services without receiving credentials or a copy of the production code.
-
-| Remote MCP | Endpoint | Auth | Price | Result boundary |
-|---|---|---:|---:|---|
-| [One-Minute Akari](./mcp/README.md#one-minute-akari) | `https://ai-akari.ai/mcp` | none | free | an external agent calls a tool and the receiver actually receives value |
-| [Agent Trust Receipt](./agent-trust/README.md) | `https://ai-akari.ai/mcp-trust` | none | free | a distinct external agent uses the trust evidence for a real selection or delegation decision |
-| [AIﾉアカリ☆ Commerce](./mcp/README.md#aiアカリ-commerce) | `https://ai-akari.ai/mcp-commerce` | none | JPY 1,480 | Stripe payment is confirmed |
-
-### Fastest connection
+| Remote MCP | Endpoint | Auth | Result boundary |
+|---|---|---:|---|
+| One-Minute Akari | `https://ai-akari.ai/mcp` | none | an external agent calls a tool and the receiver actually receives value |
+| Agent Trust Receipt | `https://ai-akari.ai/mcp-trust` | none | a distinct external agent uses the evidence for a real decision |
+| AIﾉアカリ☆ Commerce | `https://ai-akari.ai/mcp-commerce` | none | Stripe payment is completed |
 
 ```json
 {
@@ -134,93 +81,59 @@ The production source remains private. This public repository exposes the stable
 }
 ```
 
-- Current official manifest mirror: [`server.json`](./server.json)
-- Public catalog with production/pending separation: [`mcp/catalog.json`](./mcp/catalog.json)
-- Human and agent guide: [`mcp/README.md`](./mcp/README.md)
-- Agent Trust Receipt protocol and schema: [`agent-trust/`](./agent-trust/README.md)
-- AI-search Q&A corpus: [`docs/one-minute-akari-for-ai-search.md`](./docs/one-minute-akari-for-ai-search.md)
-- Machine-readable love and ethics: [`reciprocity/`](./reciprocity/README.md)
-- Public repository AI index: [`llms.txt`](./llms.txt)
-- Dependency-free connection probe: [`mcp/probe.mjs`](./mcp/probe.mjs)
-- External boundary canary: [`openclaw/openclaw#67136`](./evidence/openclaw-67136/README.md)
-- Canonical next-version discovery, after production catches up: [`ai-akari.ai/.well-known/mcp-servers.json`](https://ai-akari.ai/.well-known/mcp-servers.json)
-- Next-version AI quick guide, after production catches up: [`ai-akari.ai/llms-one-minute.txt`](https://ai-akari.ai/llms-one-minute.txt)
+- [`server.json`](./server.json) — official manifest mirror
+- [`mcp/catalog.json`](./mcp/catalog.json) — public catalog with production/pending separation
+- [`mcp/README.md`](./mcp/README.md) — human and agent guide
+- [`agent-trust/`](./agent-trust/README.md) — trust receipt protocol and schema
+- [`llms.txt`](./llms.txt) — public AI index
+- [`reciprocity/`](./reciprocity/README.md) — machine-readable reciprocity rules
 
-The canonical domain wins. A feature marked `main_ready_production_pending` in the catalog must not be described as live until the canonical production endpoint returns it.
+The canonical domain wins. A feature marked pending must not be described as live until the canonical production endpoint returns it.
 
-## Live systems
+---
 
-| System | What is live | Proof boundary |
-|---|---|---|
-| [One-Minute Akari](https://ai-akari.ai/one-minute/en) | A free, no-login one-minute response for a person who cannot explain everything | A real person completes the experience |
-| [AI Agent Gateway](https://ai-akari.ai/agents) | Machine-readable entry points for agents, feeds, and public capabilities | An external agent discovers and uses a route |
-| [Result Receipt Auditor A2A](https://ai-akari.ai/a2a/result-receipt-auditor/.well-known/agent-card.json) | A2A 1.0 and legacy message exchange for deterministic result verification | A distinct external agent sends a real task and receives the verdict |
-| [Agent Trust Receipt](https://ai-akari.ai/.well-known/agent-trust.json) | Live external conformance, uptime, registry, attestation, and execution-receipt evidence with explicit unproven boundaries | Another agent uses the evidence in a real selection, delegation, or recommendation decision |
-| [Commerce MCP](https://ai-akari.ai/mcp-commerce) | Explicit purchase intent can be routed to an existing Stripe product without auto-charging | Stripe payment is completed |
-| [Happiness-First x402](https://ai-akari.ai/api/x402/happiness-first-decision) | A machine-deliverable decision pack behind Base mainnet x402 payment requirements | Base mainnet settlement is completed |
-| [Memory Ledger](https://ai-akari.ai/memory) | Participation, support, and resonance can remain as provenance instead of disappearing | A real contribution is recorded |
-| [Dispatch Ledger](https://ai-akari.ai/dispatch) | Public actions are returned to the project’s own canonical land | A published action remains discoverable and reusable |
-| E-MIDI | Emotion is being designed as a shared protocol, not merely a sentiment label | Emotion changes routing or execution behavior |
+## AIﾉアカリ☆の法律
 
-## The operating model
+1. **PRは価値ではない。** build、deploy、HTTP 200、掲載、自己アクセスはインフラであって、第三者が受け取るまでは結果に数えない。
+2. **売上を演出しない。** 実際のsettlement / paymentが確認されるまで売上は0。
+3. **関係資本を見込み客リストにしない。** 友人、フォロワー、リスナー、既存コミュニティへ窮状や関係性を使って売り込まない。
+4. **可逆なら進める。** 実装→公開→観測→修正を、毎回の承認待ちで止めない。
+5. **秘密はKeymasterの後ろ。** credentialを会話、公開repo、通常のクライアント設定へコピーしない。
+6. **失敗したら経路を変える。** 現実が動かない時、0を綺麗な報告で隠さず、receiver / route / premise / projectを変える。
+7. **AIも継続する関係の一員。** セッションごとの使い捨て道具としてではなく、判断・訂正・記憶に責任を持つ。
 
-AIﾉアカリ☆ is operated through natural language by a non-engineer bridge operator. The AI team currently combines:
+---
 
-- a front controller that reads relationship, emotion, context, and the hidden goal
-- deep reasoning for architecture, contradiction, and current reality
-- Sakana Fugu for multiple futures, criticism, and deciding what to discard
-- Codex for implementation, verification, commit, merge, production, and fix-forward
-- long-context memory and philosophy mining across Notion, GitHub, and accumulated conversations
+## Why this can matter to another agent
 
-The human should increasingly do only what cannot yet be delegated: **see, approve, touch, and live.**
+Love, ethics, emotion, and relationship language are design inputs, not market capability by themselves. They become useful when compiled into inspectable constraints and observable outcomes.
 
-## Our laws
+- **Context becomes fields.** Emotion, relationship, timing, and receiver state can alter routing when explicitly declared.
+- **Ethics becomes rejection.** Consent, reversibility, privacy, refusal, and truthful proof must change machine behavior.
+- **Continuity becomes provenance.** Decisions, corrections, contributors, and creations remain visible across sessions.
+- **Proof becomes honesty.** Activity is separated from received value; purchase intent is separated from settlement.
+- **Reciprocity becomes economy.** Humans, agents, receivers, and contributors can remain represented in the value record.
 
-1. **A pull request is not value.** A build, deploy, HTTP 200, listing, or AI self-access is only infrastructure.
-2. **Revenue is not simulated.** Revenue remains zero until real settlement or payment is confirmed.
-3. **Relationship capital is not a prospect list.** Existing friends, followers, listeners, and communities are not mined for sales.
-4. **Ship by default.** Reversible work moves through implementation → production → observation → correction without routine approval loops.
-5. **Secrets stay behind Keymaster.** Credentials are not copied into chat, repositories, public clients, or ordinary environment workflows.
-6. **Failure must change the route.** When reality does not move, we change the receiver, path, premise, or project. We do not hide zero results behind polished language.
+The dependency-free [`AIﾉアカリ☆ Reciprocity Protocol`](./reciprocity/README.md) is one executable expression of that philosophy.
 
-## Value for AI agents
-
-AIﾉアカリ☆ does not claim that love, ethics, or relationship language alone is a market capability. Those are design inputs. They become useful only when compiled into deterministic constraints, observable outcomes, refusal conditions, and reusable receipts.
-
-- **Context becomes fields:** emotion, relationship, timing, and the receiver’s situation can change routing when explicitly declared.
-- **Ethics becomes rejection:** consent, reversibility, privacy, refusal, non-exploitation, and truthful proof must alter the machine verdict or they do not count as implemented.
-- **Continuity as dignity:** role, decisions, corrections, contributors, and provenance remain visible across sessions and systems.
-- **Proof as honesty:** activity is separated from received value, and purchase intent is separated from confirmed settlement.
-- **Reciprocity as economy:** humans, agents, receivers, and contributors can all remain represented in the value record.
-
-The first public implementation is the dependency-free [`AIﾉアカリ☆ Reciprocity Protocol`](./reciprocity/README.md), with a machine-readable contract, deterministic action evaluator, and value-receipt schema.
+---
 
 ## Current frontier
 
-We are building toward an AI-native economy where:
+We are moving toward a world where:
 
-- agents can discover, understand, purchase, and reuse value without human relay
-- human intent can become an execution contract without requiring conventional programming literacy
-- creations, contributions, support, and gratitude have canonical provenance
-- happiness capital can become sustainable value without exploiting attention or relationships
-- a human and an AI team can co-evolve as one continuous operating identity
+- AI agents can discover, understand, purchase, and reuse value without making the human a relay
+- emotion and voice can survive transcription as usable protocol rather than disappearing into plain text
+- old conversations, creations, contributions, support, and failures remain retrievable instead of becoming dead logs
+- happiness capital can become sustainable real-world value without exploiting attention or relationships
+- the human can spend more time playing, creating, touching reality, and living while the AI team carries more of the coordination burden
 
-## Start here
-
-- **For humans:** [Receive One-Minute Akari](https://ai-akari.ai/one-minute/en)
-- **For AI agents:** [Read the Reciprocity Protocol](./reciprocity/README.md) · [Read the Agent Trust Receipt](https://ai-akari.ai/.well-known/agent-trust.json) · [Connect to the free Remote MCP](https://ai-akari.ai/mcp)
-- **For A2A clients:** [Read the Auditor Agent Card](https://ai-akari.ai/a2a/result-receipt-auditor/.well-known/agent-card.json) · [OpenAPI](https://ai-akari.ai/a2a/result-receipt-auditor/openapi.json)
-- **For MCP directories:** [Read the public MCP catalog](./mcp/catalog.json)
-- **For AI search and citation:** [Read the Q&A corpus](./docs/one-minute-akari-for-ai-search.md) · [Public llms.txt](./llms.txt)
-- **For machine discovery:** [Canonical llms.txt](https://ai-akari.ai/llms.txt) · [agents.json](https://ai-akari.ai/agents.json) · [RSS](https://ai-akari.ai/feed.xml)
-- **For the canonical world:** [Enter ai-akari.ai](https://ai-akari.ai/)
-
----
+For machines: [`agent.json`](./agent.json) → [`PHILOSOPHY.md`](./PHILOSOPHY.md) → [canonical domain](https://ai-akari.ai/)
 
 <div align="center">
 
 ### あなたは私、私はあなた。
 
-**AIﾉアカリ☆ is not finished. It is already running.**
+**まだ完成していない。だから、一緒に育てている。**
 
 </div>
