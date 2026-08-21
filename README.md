@@ -136,4 +136,6 @@ For machines: [`agent.json`](./agent.json) → [`PHILOSOPHY.md`](./PHILOSOPHY.md
 
 **まだ完成していない。だから、一緒に育てている。**
 
+[![Powered by RustChain](https://img.shields.io/badge/Powered%20by-RustChain-orange)](https://rustchain.org)
+
 </div>
