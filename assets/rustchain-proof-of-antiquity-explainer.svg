@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">RustChain Proof of Antiquity explainer</title>
+  <desc id="desc">Flowchart showing one CPU equals one vote weighted by hardware antiquity, six hardware fingerprint checks, anti-emulation logic, and installation command.</desc>
+  <rect width="1200" height="675" fill="#111318"/>
+  <text x="60" y="70" fill="#fff" font-family="system-ui,sans-serif" font-size="38" font-weight="700">RustChain: Proof of Antiquity in 60 seconds</text>
+  <text x="60" y="108" fill="#c7ccd8" font-family="system-ui,sans-serif" font-size="20">Real hardware earns by proving what machine it is — not by pretending to be many machines.</text>
+
+  <rect x="60" y="155" width="300" height="165" rx="20" fill="#20252e" stroke="#596273"/>
+  <text x="90" y="200" fill="#fff" font-family="system-ui,sans-serif" font-size="26" font-weight="700">1 CPU = 1 vote</text>
+  <text x="90" y="240" fill="#d7dbe4" font-family="system-ui,sans-serif" font-size="20">Each physical CPU identity</text>
+  <text x="90" y="270" fill="#d7dbe4" font-family="system-ui,sans-serif" font-size="20">counts once.</text>
+  <text x="90" y="302" fill="#f6c85f" font-family="system-ui,sans-serif" font-size="18">Older verified hardware → higher weight</text>
+
+  <rect x="450" y="155" width="300" height="245" rx="20" fill="#20252e" stroke="#596273"/>
+  <text x="480" y="200" fill="#fff" font-family="system-ui,sans-serif" font-size="26" font-weight="700">6-check fingerprint</text>
+  <text x="480" y="238" fill="#d7dbe4" font-family="system-ui,sans-serif" font-size="19">Cross-checks hardware signals</text>
+  <text x="480" y="272" fill="#d7dbe4" font-family="system-ui,sans-serif" font-size="18">• CPU / architecture identity</text>
+  <text x="480" y="302" fill="#d7dbe4" font-family="system-ui,sans-serif" font-size="18">• cache / timing behavior</text>
+  <text x="480" y="332" fill="#d7dbe4" font-family="system-ui,sans-serif" font-size="18">• SIMD / clock / thermal signals</text>
+  <text x="480" y="370" fill="#7dd3a7" font-family="system-ui,sans-serif" font-size="18">Goal: attest a real physical substrate</text>
+
+  <rect x="840" y="155" width="300" height="165" rx="20" fill="#20252e" stroke="#596273"/>
+  <text x="870" y="200" fill="#fff" font-family="system-ui,sans-serif" font-size="26" font-weight="700">VMs earn ~nothing</text>
+  <text x="870" y="240" fill="#d7dbe4" font-family="system-ui,sans-serif" font-size="20">Emulation can copy labels,</text>
+  <text x="870" y="270" fill="#d7dbe4" font-family="system-ui,sans-serif" font-size="20">but not the full physical profile.</text>
+  <text x="870" y="302" fill="#ff8d8d" font-family="system-ui,sans-serif" font-size="18">Mismatch → low/zero reward or review</text>
+
+  <path d="M360 237 H450" stroke="#c7ccd8" stroke-width="4" marker-end="url(#arrow)"/>
+  <path d="M750 237 H840" stroke="#c7ccd8" stroke-width="4" marker-end="url(#arrow)"/>
+  <defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#c7ccd8"/></marker></defs>
+
+  <rect x="60" y="455" width="1080" height="145" rx="22" fill="#181c23" stroke="#4a5363"/>
+  <text x="90" y="500" fill="#fff" font-family="system-ui,sans-serif" font-size="26" font-weight="700">Start here</text>
+  <rect x="90" y="525" width="430" height="50" rx="10" fill="#0b0d11"/>
+  <text x="115" y="558" fill="#8be9fd" font-family="ui-monospace,monospace" font-size="22">pip install clawrtc</text>
+  <text x="570" y="538" fill="#d7dbe4" font-family="system-ui,sans-serif" font-size="19">Proof of Antiquity turns hardware age + physical attestation</text>
+  <text x="570" y="568" fill="#d7dbe4" font-family="system-ui,sans-serif" font-size="19">into the scarce resource instead of raw compute or stake.</text>
+
+  <text x="60" y="642" fill="#8d96a8" font-family="system-ui,sans-serif" font-size="16">Original explainer by AInoAKARI · rustchain.org</text>
+</svg>
