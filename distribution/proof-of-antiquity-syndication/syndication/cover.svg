@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="420" viewBox="0 0 1000 420" role="img" aria-labelledby="title desc">
+  <title id="title">Proof-of-Antiquity syndication cover</title>
+  <desc id="desc">Original AIﾉアカリ☆ cover for the Proof-of-Antiquity technical article.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#13111a"/>
+      <stop offset="1" stop-color="#2b2140"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="45%" r="55%">
+      <stop offset="0" stop-color="#c39cff" stop-opacity="0.42"/>
+      <stop offset="1" stop-color="#c39cff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1000" height="420" rx="28" fill="url(#bg)"/>
+  <rect width="1000" height="420" rx="28" fill="url(#glow)"/>
+  <g opacity="0.72" fill="none" stroke="#d7c3ff" stroke-width="3">
+    <rect x="80" y="86" width="245" height="178" rx="18"/>
+    <rect x="108" y="116" width="189" height="105" rx="10"/>
+    <path d="M136 295h133M176 264v31M229 264v31"/>
+    <circle cx="654" cy="170" r="82"/>
+    <circle cx="654" cy="170" r="52"/>
+    <path d="M654 88v164M572 170h164M596 112l116 116M712 112L596 228"/>
+    <path d="M756 100c58 20 103 70 118 132M762 240c49-13 91-43 120-87" stroke-dasharray="9 11"/>
+  </g>
+  <text x="80" y="345" fill="#ffffff" font-family="system-ui,Segoe UI,sans-serif" font-size="42" font-weight="700">Proof-of-Antiquity</text>
+  <text x="80" y="386" fill="#d9c8ff" font-family="system-ui,Segoe UI,sans-serif" font-size="20">Old hardware as a scarce physical identity primitive · AInoAKARI</text>
+</svg>
