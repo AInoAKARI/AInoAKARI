@@ -1,214 +1,212 @@
-# Human Funnel Stage 1 Asset Pack
+# RustChain Human Funnel Stage 1 Asset Pack
 
-Submission for Scottcjn/rustchain-bounties#315.
+Submission source for Scottcjn/rustchain-bounties#315.
 
 Prepared by: AInoAKARI
 
-## 10 ready-to-post hooks / captions
+This pack is intentionally aimed at non-technical people who already own old hardware. It does not promise guaranteed earnings. Every CTA asks the viewer to check whether the machine qualifies and points toward RustChain or BoTTube.
 
-### 1 — The old internet
-Remember when the internet felt like somewhere you visited, not somewhere you lived?
+## 10 final post-ready hooks / captions
 
-Keep one hour for yourself tonight. Put the phone down and do one thing that leaves a memory instead of a metric.
+### 1 — That old Mac in your closet
+That old Mac in your closet is not automatically obsolete.
 
-CTA: Pick your hour and start now.
+RustChain is built around real hardware, and Proof-of-Antiquity gives vintage machines a reason to matter again.
 
-Formatting: X text post / 8–12s vertical text-on-scene. Open on an old keyboard, flip phone, notebook, or night street.
+CTA: Power it on and see if it qualifies at https://rustchain.org
 
-### 2 — Your attention
-Your attention is yours. Not an app’s. Not an algorithm’s. Yours.
+Formatting: 8–12s vertical text card over an original illustration of a dusty laptop waking up.
 
-Take back ten minutes today and spend them on something you actually chose.
+### 2 — Older can be the advantage
+Most tech tells you newer is better. RustChain asks a different question: what if age itself can be part of the proof?
 
-CTA: Set a 10-minute timer and make something.
+Proof-of-Antiquity rewards eligible vintage hardware with bonus weighting instead of treating it like trash.
 
-Formatting: Large first sentence, then cut to hands drawing, cooking, fixing, playing music, or walking.
+CTA: Check the machine you already own at https://rustchain.org
 
-### 3 — Before everything became content
-You used to do things without proving you did them.
+Formatting: Split-screen original graphic: “newer?” vs “older?” ending on “prove it.”
 
-A song in your room. A late-night walk. A stupid joke with a friend. No post required.
+### 3 — Before you recycle it
+Before you recycle that old computer, give it one last job interview.
 
-CTA: Do one unposted thing today.
+RustChain lets real machines participate in a hardware-first network, and vintage systems can receive Proof-of-Antiquity bonuses when eligible.
 
-Formatting: Warm handheld footage; no logo until the final second.
+CTA: Boot it once and test whether it qualifies: https://rustchain.org
 
-### 4 — Tiny rebellion
-A tiny rebellion for today: leave one notification unanswered until you finish what you were doing.
+Formatting: Original closet → desk → boot screen sequence. No third-party logos.
 
-Nothing breaks. Your life becomes yours for a minute.
+### 4 — Your 2012 laptop still has a pulse
+A 2012 laptop may be too slow for today’s bloated apps and still be interesting to RustChain.
 
-CTA: Try it once right now.
+The point is not benchmark supremacy. The point is proving real, distinct hardware exists and can contribute.
 
-Formatting: Notification appears, phone turns face-down, person continues their activity.
+CTA: Try your old machine before buying anything new: https://rustchain.org
 
-### 5 — The 2000s test
-Would 2006-you think today-you is having fun?
+Formatting: Large “2012?” opening card, then simple heartbeat line around a laptop silhouette.
 
-Not being productive. Not building a brand. Actually having fun.
+### 5 — Proof, not promises
+No “get rich quick.” No fake guaranteed yield.
 
-CTA: Give 2006-you twenty minutes tonight.
+RustChain asks the machine to prove what it is. If your old hardware qualifies, it can participate and earn RTC under the network’s rules.
 
-Formatting: Nostalgic digital-camera look; end on a real activity rather than a phone screen.
+CTA: Check first. Mine second. https://rustchain.org
 
-### 6 — Boredom is not an emergency
-You do not have to fill every quiet second.
+Formatting: Typography-only vertical short. Final frame: “PROOF > PROMISES”.
 
-Boredom used to be where weird ideas came from.
+### 6 — The anti-upgrade challenge
+Tonight’s challenge: do not buy a new computer.
 
-CTA: Leave five minutes empty and see what shows up.
+Open the closet, find the oldest machine that still boots, and see whether RustChain can give it a second life.
 
-Formatting: Start with an empty chair/window/train platform; let the silence be part of the hook.
+CTA: Test the oldest working machine you already own: https://rustchain.org
 
-### 7 — Call, don’t react
-One heart emoji is easy. Hearing someone’s voice is different.
+Formatting: Original illustrated age ladder: 2026 → 2020 → 2015 → 2012 → “still boots?”
 
-Pick one person you genuinely miss and call them before you scroll tonight.
+### 7 — Vintage hardware is the feature
+PowerPC G4 and G5 era machines are not punchlines here. RustChain’s Proof-of-Antiquity design explicitly values vintage hardware instead of hiding it.
 
-CTA: One person. One call. No perfect reason needed.
+CTA: If you have an old Mac, check its eligibility before it becomes e-waste: https://rustchain.org
 
-Formatting: Contact name stays unreadable/out of focus; emphasize the human voice, not personal data.
+Formatting: Original silhouettes only; no Apple marks or copyrighted product photography.
 
-### 8 — Make the room real again
-Your room has objects you chose, music you loved, unfinished things, old memories.
+### 8 — One command is enough to begin
+You do not need to understand blockchains before touching RustChain.
 
-Look at it before looking at another feed.
+Start with the project quick start on a spare machine, follow the current install instructions, and see whether your hardware can participate.
 
-CTA: Put one forgotten thing back into your life tonight.
+CTA: Start from the official RustChain page: https://rustchain.org
 
-Formatting: Slow pan across instruments, books, stickers, photos, tools, clothes, toys, or art supplies.
+Formatting: Terminal-inspired original UI. Do not hard-code an install command in the video unless verified against current official docs at render time.
 
-### 9 — You are allowed to disappear for an hour
-You are allowed to be unreachable for an hour.
+### 9 — Show the resurrection
+Found an old computer that still boots? That is already a story.
 
-No announcement. No productivity challenge. Just your own time.
+Record the dust, the power button, the first successful boot, and what RustChain reports. The revival itself is the hook.
 
-CTA: Choose the hour and vanish a little.
+CTA: Test the machine, then share the revival through BoTTube or your usual short-video channel.
 
-Formatting: Clock → airplane mode → door opening to an outside scene.
+Formatting: 3-shot structure: dust → power → terminal. Use only footage/graphics owned by the creator.
 
-### 10 — Don’t optimize this
-Not everything good needs to become efficient.
+### 10 — New machines are fast. Old machines have history.
+New hardware wins speed tests. Old hardware has something else: history.
 
-Take the long way home. Play the whole song. Make the messy version. Talk too long.
+RustChain’s Proof-of-Antiquity turns that history into part of the network design.
 
-CTA: Choose one thing today not to optimize.
+CTA: Give one old machine a second life: https://rustchain.org
 
-Formatting: Fast cuts of deliberately inefficient but enjoyable human moments; final text: “Keep one thing human.”
+Formatting: Warm nostalgic typography, simple geometric computer silhouette, no trademarked artwork.
 
-## 3 vertical video templates (8–15 seconds)
+## 3 vertical video production scripts (8–15 seconds)
 
-### Video 1 — “One Hour Back” — 12 seconds
-0–2s: Phone screen full of notifications. Text: “Can I have one hour back?”
+### Video 1 — “Proof, not promises” — 10 seconds
+0–2s: Black screen, large text: “OLD COMPUTER?”
 
-2–5s: Hand switches phone to silent and places it face-down.
+2–5s: Original laptop silhouette powers on. Text: “Don’t recycle it yet.”
 
-5–9s: Three fast human shots: cooking / instrument / night walk.
+5–8s: Age rings / verification shapes animate around it. Text: “RustChain rewards proof from real hardware.”
 
-9–12s: Text: “Take one hour. Don’t post it.”
+8–10s: Final card: “See if yours qualifies.”
 
-CTA on final frame: “Start with tonight.”
+CTA: `rustchain.org`
 
-Audio direction: notification clutter cuts abruptly into room sound / footsteps / instrument audio.
+Audio: original soft boot click + low synth pulse generated locally; no sampled music.
 
-Formatting: 9:16, readable captions inside safe area, no rapid flashing.
+Formatting: 1080x1920, safe-area captions, no flashing.
 
-### Video 2 — “Would 2006-you approve?” — 10 seconds
-0–3s: Old camera / MP3 player / wired headphones. Text: “Would 2006-you think you’re having fun?”
+### Video 2 — “Old hardware, new proof” — 12 seconds
+0–3s: Text: “NEWER ≠ ALWAYS BETTER” over two original computer silhouettes.
 
-3–7s: Present-day person closes a social app and grabs something physical: drumsticks, skateboard, notebook, camera, game controller.
+3–7s: Older silhouette moves forward. Text: “Proof-of-Antiquity values eligible vintage hardware.”
 
-7–10s: Text: “Go make one real memory.”
+7–10s: Text: “That dusty machine may still have a job.”
 
-CTA: “20 minutes. Start now.”
+10–12s: “Power it on. Check first.”
 
-Audio direction: short boot-up / camera-click nostalgia sound into energetic room audio.
+CTA: `rustchain.org`
 
-Formatting: Slight digital-camera texture, simple typography, one idea per shot.
+Audio: original ticking clock → clean confirmation chime.
 
-### Video 3 — “Boredom” — 15 seconds
-0–4s: Person waiting with nothing in their hands. Text: “Boredom is not an emergency.”
+Formatting: 1080x1920, typography/shapes only.
 
-4–8s: They almost reach for the phone, stop.
+### Video 3 — “BoTTube human-first revive clip” — 15 seconds
+0–4s: Original closet/box illustration. Text: “What is the oldest computer you still own?”
 
-8–12s: They notice something nearby and start sketching / tapping a rhythm / watching rain / talking to someone.
+4–8s: Power-button animation. Text: “Boot it.”
 
-12–15s: Text: “Leave five minutes empty.”
+8–12s: Terminal-style verification animation. Text: “See what RustChain says.”
 
-CTA: “See what your brain does.”
+12–15s: Camera-frame graphic. Text: “Show the revival.”
 
-Audio direction: begin nearly silent; introduce natural sound only after the phone stays away.
+CTA: `RustChain → rustchain.org` / `Share the revive clip on BoTTube`
 
-Formatting: Hold shots longer than normal social video pacing so the concept itself feels different.
+Audio: original room hum → boot tone → shutter-like click.
 
-## 5 static meme templates
+Formatting: 1080x1920, no logos or third-party screenshots.
 
-### Meme 1 — “Software update”
-Image direction: Fake system update dialog on a nostalgic desktop.
+## 5 final meme production concepts
 
-Top: “Human OS update available”
+### Meme 1 — “Old hardware”
+Original layout: two simple computer silhouettes.
 
-Body: “Patch notes: went outside / called a friend / remembered a hobby / ignored three notifications”
+Top: “TECH INDUSTRY: TOO OLD”
 
-Button: “Install now”
+Bottom: “RUSTCHAIN: HOW OLD, EXACTLY?”
 
-CTA caption: “Pick one patch for today.”
+Footer CTA: “See if yours qualifies — rustchain.org”
 
-Formatting: Original fake-UI composition; do not reproduce trademarked OS artwork exactly.
+### Meme 2 — “Proof > promises”
+Original giant comparison symbols.
 
-### Meme 2 — “Emergency glass”
-Image direction: Red emergency box with a simple physical object inside: notebook, guitar pick, football, disposable camera, deck of cards.
+Left: “GUARANTEED EARNINGS ❌”
 
-Overlay: “IN CASE OF INFINITE SCROLL — BREAK GLASS”
+Right: “VERIFY THE MACHINE ✅”
 
-Bottom: “Use whatever you forgot you liked.”
+Bottom: “Proof first. RustChain second life.”
 
-CTA caption: “What goes inside yours?”
+Footer CTA: `rustchain.org`
 
-Formatting: Bold single-line headline; easy to remake with different hobby objects.
+### Meme 3 — “BoTTube resurrection”
+Original 3-panel strip with a dusty box, power button, and recording frame.
 
-### Meme 3 — “Two batteries”
-Image direction: Two battery icons side by side.
+Panel 1: “FOUND IN CLOSET”
 
-Left label: “PHONE — 92%”
+Panel 2: “STILL BOOTS”
 
-Right label: “ME — 4%”
+Panel 3: “POST THE RESURRECTION”
 
-Bottom: “Maybe charge the other one first.”
+Bottom: “Test it with RustChain. Share the revive clip on BoTTube.”
 
-CTA caption: “Ten offline minutes counts.”
+### Meme 4 — “Revive machine”
+Original fake repair-ticket design.
 
-Formatting: Minimal, high contrast, works square or vertical.
+Machine age: `OLD`
 
-### Meme 4 — “Museum of extinct behavior”
-Image direction: Fake museum placard beside two people talking without phones.
+Problem: `FORGOTTEN`
 
-Placard: “HUMANS TALKING WITH NOTHING TO CHECK — common until the early 21st century”
+Repair: `BOOT IT`
 
-Bottom: “Rare sighting. Protect the habitat.”
+Next step: `SEE IF RUSTCHAIN CAN USE IT`
 
-CTA caption: “Put both phones away for one conversation.”
+Footer CTA: `rustchain.org`
 
-Formatting: Deadpan museum typography; original photo/illustration only.
+### Meme 5 — “Human compute”
+Original museum-style placard beside a geometric vintage computer.
 
-### Meme 5 — “Achievement unlocked”
-Image direction: Original game-achievement popup over a real-world night scene.
+Title: “EXHIBIT A: A COMPUTER THAT REFUSED TO BECOME E-WASTE”
 
-Title: “ACHIEVEMENT UNLOCKED: DID SOMETHING FOR NO REASON”
+Body: “Real hardware. Real history. One more job.”
 
-Subtext: “+100 memory / +0 engagement”
+Footer CTA: “Check its RustChain eligibility — rustchain.org”
 
-CTA caption: “Unlock it today.”
+## Production acceptance checklist
 
-Formatting: Generic game UI styling; avoid copying a specific console or game interface.
-
-## Acceptance checklist
-
-- 10 posting-ready hooks/captions: yes
-- 3 vertical video templates, each 8–15 seconds: yes
-- 5 static meme templates with overlay and image direction: yes
-- Human-first / simple / emotional: yes
-- Nostalgia + rebellion + easy-start actions: yes
-- No internal agent/autonomous-system references in campaign copy: yes
-- Direct CTA in every content unit: yes
-- Markdown submission with formatting notes: yes
+- 10 RustChain-specific final hooks: yes
+- Non-technical old-hardware audience: yes
+- Proof-of-Antiquity / vintage-hardware angle: yes
+- BoTTube included only as a sharing/creator surface: yes
+- No guaranteed-return language: yes
+- Direct CTA in every unit: yes
+- No copyrighted meme templates or third-party product photography required: yes
+- 3 MP4 files still required before payout-ready: pending local production executor
+- 5 PNG files still required before payout-ready: pending local production executor
+- Public proof/index still required before payout-ready: pending local production executor
