@@ -24,4 +24,4 @@ All five opened successfully through Pillow verification at exactly 1080x1080.
 
 ## Publication boundary
 
-This file records deterministic render verification only. The eight binary files are **not claimed public until they are committed and re-fetched from GitHub**. RustChain #315 is **not claimed accepted or settled** without maintainer/payout evidence. Cash delta remains 0.
+The eight binaries have a separately hashed public mirror listed in `DELIVERY_INDEX.md`. The mirror is not claimed publicly available until each raw URL is anonymously re-fetched after publication. RustChain #315 is **not claimed accepted or settled** without maintainer/payout evidence. Cash delta remains 0.
