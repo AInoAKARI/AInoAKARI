@@ -1,6 +1,6 @@
 # RustChain #315 — AInoAKARI Delivery Index
 
-Updated: 2026-08-30 13:12 JST
+Updated: 2026-08-30 12:00 JST
 
 Bounty: https://github.com/Scottcjn/rustchain-bounties/issues/315
 
@@ -32,7 +32,7 @@ The delivery contained all eight concrete binaries plus `ARTIFACT_INDEX.md`. A p
 - [04-revive-machine.png](https://raw.githubusercontent.com/AInoAKARI/AInoAKARI/main/distribution/rustchain-human-funnel-stage1/public/memes/04-revive-machine.png) — 44,382 bytes — SHA-256 `80c41b2b0cf807822c4ecb450a4c5b9b083f24ce4f15a9b630a0529db10f7d20`
 - [05-human-compute.png](https://raw.githubusercontent.com/AInoAKARI/AInoAKARI/main/distribution/rustchain-human-funnel-stage1/public/memes/05-human-compute.png) — 45,390 bytes — SHA-256 `d329738e156af4e3cd8fae7de078de95fae5f29dab8396fe64d2e1713035ae3c`
 
-The public mirror was generated with Pillow 12.1.0 and ffmpeg 9.0.1 from the same committed source. Its hashes differ from the earlier Gmail attachments rendered with Pillow 12.3.0 and ffmpeg 7.1.5; the source, filenames, dimensions, durations, and message content remain the same. Public URL verification is recorded only after anonymous re-fetch.
+The public mirror was generated with Pillow 12.1.0 and ffmpeg 9.0.1 from the same committed source. Its hashes differ from the earlier Gmail attachments rendered with Pillow 12.3.0 and ffmpeg 7.1.5; the source, filenames, dimensions, durations, and message content remain the same. All eight raw URLs were anonymously re-fetched and matched the byte counts and SHA-256 values above at 2026-08-30 12:00 JST.
 
 ## Truth boundary
 
